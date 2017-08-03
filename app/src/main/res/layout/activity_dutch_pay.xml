@@ -21,24 +21,29 @@
         android:orientation="horizontal">
 
         <RadioButton
+            android:id="@+id/radio_button_100"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:checked="true"
             android:text="100원"/>
 
         <RadioButton
+            android:id="@+id/radio_button_500"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="500원"/>
 
         <RadioButton
+            android:id="@+id/radio_button_1000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="1,000원"/>
 
         <RadioButton
+            android:id="@+id/radio_button_5000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -67,7 +72,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
-
 
     <Button
         android:id="@+id/calc_button"

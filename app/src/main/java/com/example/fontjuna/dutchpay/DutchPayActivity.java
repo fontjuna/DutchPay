@@ -16,7 +16,11 @@ public class DutchPayActivity extends AppCompatActivity {
     public static final String DELIMITER_RATIO = "!";
     public static final String DELIMITER_MEMBER = ",";
     public static final String DELIMITER_MONEY = ":";
-    Map<String, Integer> resultNames = new LinkedHashMap<>();
+
+    Map<Integer, String> mSentence = new LinkedHashMap<>();
+    Map<String, Double> mMembers = new LinkedHashMap<>();
+    Map<String, Integer> mResult = new LinkedHashMap<>();
+
     int mAmount = 0;
     int mRemain = 0;
 
@@ -53,8 +57,8 @@ public class DutchPayActivity extends AppCompatActivity {
 
         int money = 0;
         String text = "총금액 = " + mAmount;
-        for (String key : resultNames.keySet()) {
-            money = (int) ((resultNames.get(key) + unit - 1) / unit) * unit;
+        for (String key : mResult.keySet()) {
+            money = (int) ((mResult.get(key) + unit - 1) / unit) * unit;
             text += "\n" + key + " : " + money;
             mRemain += money;
         }
@@ -64,7 +68,7 @@ public class DutchPayActivity extends AppCompatActivity {
         result.setText(text);
         mAmount = 0;
         mRemain = 0;
-        resultNames.clear();
+        mResult.clear();
     }
 
     private void parseBill(String text) {
@@ -103,14 +107,96 @@ public class DutchPayActivity extends AppCompatActivity {
         int money;
         for (String key : readNames.keySet()) {
             money = 0;
-            if (resultNames.containsKey(key)) {
-                money = resultNames.get(key);
+            if (mResult.containsKey(key)) {
+                money = mResult.get(key);
             }
             // 단위지정
             money += (int) (readNames.get(key) * everyMoney);
 //            money += (int) ((readNames.get(key) * everyMoney + unit) / unit) * unit;
-            resultNames.put(key, money);
+            mResult.put(key, money);
         }
 
+    }
+
+    public void onCalcButtonClicked(){
+
+    }
+
+    class Items {
+        private int mAmount;
+        private Members mMembers;
+
+        public Items(int amount, Members members) {
+            this.mAmount = amount;
+            mMembers = members;
+        }
+
+        public int getAmount() {
+            return mAmount;
+        }
+
+        public void setAmount(int amount) {
+            this.mAmount = amount;
+        }
+
+        public Members getMembers() {
+            return mMembers;
+        }
+
+        public void setMembers(Members members) {
+            mMembers = members;
+        }
+    }
+
+    class Members {
+        private String mPerson;
+        private double mRatio;
+
+        public Members(String name, double ratio) {
+            this.mPerson = name;
+            this.mRatio = ratio;
+        }
+
+        public String getName() {
+            return mPerson;
+        }
+
+        public void setName(String name) {
+            this.mPerson = name;
+        }
+
+        public double getRatio() {
+            return mRatio;
+        }
+
+        public void setRatio(double ratio) {
+            this.mRatio = ratio;
+        }
+    }
+
+    class Result {
+        private String mName;
+        private int mDivide;
+
+        public Result(String name, int money) {
+            this.mName = name;
+            this.mDivide = money;
+        }
+
+        public String getName() {
+            return mName;
+        }
+
+        public void setName(String name) {
+            this.mName = name;
+        }
+
+        public int getDivide() {
+            return mDivide;
+        }
+
+        public void setDivide(int divide) {
+            mDivide = divide;
+        }
     }
 }
