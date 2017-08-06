@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import java.util.Map;
 
 public class DutchPayActivity extends AppCompatActivity {
 
+    private static final String TAG = DutchPayActivity.class.getSimpleName();
     public static final String DELIMITER_ITEM = "/";
     public static final String DELIMITER_RATIO = "!";
     public static final String DELIMITER_MEMBER = ",";
@@ -56,16 +58,18 @@ public class DutchPayActivity extends AppCompatActivity {
 
         // 명단 등록하고 나눈 금액을 저장한다
         RadioGroup unitRadioGroup = (RadioGroup) findViewById(R.id.unit_radio_group);
-        int pos = unitRadioGroup.getCheckedRadioButtonId();
-        if (pos < 1) {
-            pos = 3; // 기본 단위
+        int radioButtonId = unitRadioGroup.getCheckedRadioButtonId();
+        int unit;
+        if (radioButtonId == -1) {
+            unit = 10;
+        } else {
+            RadioButton unitRadioButton = (RadioButton) findViewById(radioButtonId);
+            unit = Integer.parseInt(unitRadioButton.getText().toString());
         }
-        int unit = mUnits[pos - 1];
-
         int money = 0;
         String text = "";
-        text += "\n총 금 액 = " + mAmount;
-        text += "\n계산단위 : " + mUnits[pos - 1];
+        text += "총 금 액 = " + mAmount;
+        text += "\n계산단위 : " + unit;
 
         String temp = "";
         for (String key : resultNames.keySet()) {
