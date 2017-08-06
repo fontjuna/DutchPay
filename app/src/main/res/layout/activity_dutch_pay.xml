@@ -8,10 +8,10 @@
     tools:context="com.example.fontjuna.dutchpay.DutchPayActivity">
 
     <LinearLayout
-        android:layout_weight="1"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -28,37 +28,44 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:textSize="12sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1" />
 
             <RadioButton
+                android:textSize="12sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
 
             <RadioButton
+                android:textSize="12sp"
+                android:id="@+id/third_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10" />
 
             <RadioButton
+                android:textSize="12sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="50" />
 
             <RadioButton
+                android:textSize="12sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="100" />
 
             <RadioButton
+                android:textSize="12sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="500" />
 
             <RadioButton
-                android:checked="true"
+                android:textSize="12sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1000" />
@@ -89,7 +96,7 @@
             android:layout_height="wrap_content"
             android:background="#d6d7d7"
             android:padding="4dp"
-            android:text="입력예시" />
+            android:text="입력예시/계산결과" />
 
         <ScrollView
             android:layout_width="match_parent"
