@@ -16,25 +16,32 @@ public class DutchPayActivity extends AppCompatActivity {
     public static final String DELIMITER_RATIO = "!";
     public static final String DELIMITER_MEMBER = ",";
     public static final String DELIMITER_MONEY = ":";
+    public static final String INFORMATION = "구분자로 [ : , ! / ] 괄호안의 4개 문자를 사용합니다"
+            + "\n : 걷을금액과 낼사람들을 구분합니다"
+            + "\n , 낼사람들 서로간을  구분 합니다"
+            + "\n ! 그사람의 배율 (A는 2배이면 A!2로 입력)"
+            + "\n / 걷을 금액이 또 있으면 / 다음에 이어서 입력\n"
+            + "\n상황1)5000원을 A,B,C 이렇게 세사람이 똑 같이 나눈다면"
+            + "\n입력1)5000:A,B,C"
+            + "\n상황2)상황1 에서 B는 다른 사람보다 1.5배 내야 한다면"
+            + "\n입력2)5000:A,B!1.5,C (!를 사용 B!1.5 로 입력)"
+            + "\n상황3)상황2 에 더해서 3000원을 A와 C가 똑같이 더 낸다면"
+            + "\n입력3)5000:A,B!1.5,C/3000:A,C\n"
+            + "\n계산결과"
+            + "\n1 : ";
 
-    Map<Integer, String> mSentence = new LinkedHashMap<>();
-    Map<String, Double> mMembers = new LinkedHashMap<>();
-    Map<String, Integer> mResult = new LinkedHashMap<>();
-
+    Map<String, Integer> resultNames = new LinkedHashMap<>();
     int mAmount = 0;
     int mRemain = 0;
+    int[] mUnits = new int[]{1, 5, 10, 50, 100, 500, 1000};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dutch_pay);
 
-        EditText editText = (EditText) findViewById(R.id.goods_edit_text);
-        editText.setHint(
-                "금액" + DELIMITER_MONEY + "이름" + DELIMITER_RATIO + "배율"
-                        + DELIMITER_MEMBER + "..." + DELIMITER_ITEM + "..."
-                        + " ('" + DELIMITER_RATIO + "배율' 생략하면 '" + DELIMITER_RATIO + "1'임)"
-        );
+        TextView resultTextView = (TextView) findViewById(R.id.result_text_view);
+        resultTextView.setHint(INFORMATION);
     }
 
     public void onClick_calc_button(View view) {
@@ -51,24 +58,29 @@ public class DutchPayActivity extends AppCompatActivity {
         RadioGroup unitRadioGroup = (RadioGroup) findViewById(R.id.unit_radio_group);
         int pos = unitRadioGroup.getCheckedRadioButtonId();
         if (pos < 1) {
-            pos = 3; // 기본 단위 1,000원5000
+            pos = 3; // 기본 단위
         }
-        int unit = new int[]{100, 500, 1000, 5000}[pos - 1];
+        int unit = mUnits[pos - 1];
 
         int money = 0;
-        String text = "총금액 = " + mAmount;
-        for (String key : mResult.keySet()) {
-            money = (int) ((mResult.get(key) + unit - 1) / unit) * unit;
-            text += "\n" + key + " : " + money;
+        String text = "";
+        text += "\n총 금 액 = " + mAmount;
+        text += "\n계산단위 : " + mUnits[pos - 1];
+
+        String temp = "";
+        for (String key : resultNames.keySet()) {
+            money = (int) ((resultNames.get(key) + unit - 1) / unit) * unit;
+            temp += "\n" + key + " : " + money;
             mRemain += money;
         }
         text += "\n걷는금액 : " + mRemain;
         text += "\n남는금액 : " + (mRemain - mAmount);
+        text += "\n" + temp;
 
         result.setText(text);
         mAmount = 0;
         mRemain = 0;
-        mResult.clear();
+        resultNames.clear();
     }
 
     private void parseBill(String text) {
@@ -100,103 +112,17 @@ public class DutchPayActivity extends AppCompatActivity {
         }
 
 //        // 명단 등록하고 나눈 금액을 저장한다
-//        RadioGroup unitRadioGroup = (RadioGroup) findViewById(R.id.unit_radio_group);
-
-//        int unit = new int[]{100, 500, 1000, 5000}[unitRadioGroup.getCheckedRadioButtonId() - 1];
         double everyMoney = (amount / ratioSum);
         int money;
         for (String key : readNames.keySet()) {
             money = 0;
-            if (mResult.containsKey(key)) {
-                money = mResult.get(key);
+            if (resultNames.containsKey(key)) {
+                money = resultNames.get(key);
             }
             // 단위지정
             money += (int) (readNames.get(key) * everyMoney);
-//            money += (int) ((readNames.get(key) * everyMoney + unit) / unit) * unit;
-            mResult.put(key, money);
+            resultNames.put(key, money);
         }
 
-    }
-
-    public void onCalcButtonClicked(){
-
-    }
-
-    class Items {
-        private int mAmount;
-        private Members mMembers;
-
-        public Items(int amount, Members members) {
-            this.mAmount = amount;
-            mMembers = members;
-        }
-
-        public int getAmount() {
-            return mAmount;
-        }
-
-        public void setAmount(int amount) {
-            this.mAmount = amount;
-        }
-
-        public Members getMembers() {
-            return mMembers;
-        }
-
-        public void setMembers(Members members) {
-            mMembers = members;
-        }
-    }
-
-    class Members {
-        private String mPerson;
-        private double mRatio;
-
-        public Members(String name, double ratio) {
-            this.mPerson = name;
-            this.mRatio = ratio;
-        }
-
-        public String getName() {
-            return mPerson;
-        }
-
-        public void setName(String name) {
-            this.mPerson = name;
-        }
-
-        public double getRatio() {
-            return mRatio;
-        }
-
-        public void setRatio(double ratio) {
-            this.mRatio = ratio;
-        }
-    }
-
-    class Result {
-        private String mName;
-        private int mDivide;
-
-        public Result(String name, int money) {
-            this.mName = name;
-            this.mDivide = money;
-        }
-
-        public String getName() {
-            return mName;
-        }
-
-        public void setName(String name) {
-            this.mName = name;
-        }
-
-        public int getDivide() {
-            return mDivide;
-        }
-
-        public void setDivide(int divide) {
-            mDivide = divide;
-        }
     }
 }

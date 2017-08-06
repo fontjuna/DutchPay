@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,76 +7,116 @@
     android:orientation="vertical"
     tools:context="com.example.fontjuna.dutchpay.DutchPayActivity">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="계산단위"/>
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <RadioGroup
-        android:id="@+id/unit_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/radio_button_100"
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checked="true"
-            android:text="100원"/>
+            android:background="#d6d7d7"
+            android:padding="4dp"
+            android:text="계산단위" />
 
-        <RadioButton
-            android:id="@+id/radio_button_500"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/unit_radio_group"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="500원"/>
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/radio_button_1000"
-            android:layout_width="wrap_content"
+            <RadioButton
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1" />
+
+            <RadioButton
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5" />
+
+            <RadioButton
+                android:textSize="12sp"
+                android:id="@+id/third_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10" />
+
+            <RadioButton
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50" />
+
+            <RadioButton
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100" />
+
+            <RadioButton
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="500" />
+
+            <RadioButton
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1000" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/input_text_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="1,000원"/>
+            android:background="#d6d7d7"
+            android:padding="4dp"
+            android:text="대상입력" />
 
-        <RadioButton
-            android:id="@+id/radio_button_5000"
-            android:layout_width="wrap_content"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/goods_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="금액:이름!배율,..." />
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/information_text_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="5,000원"/>
-    </RadioGroup>
+            android:background="#d6d7d7"
+            android:padding="4dp"
+            android:text="입력예시/계산결과" />
 
-    <TextView
-        android:id="@+id/input_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="대상입력"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/goods_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="금액:이름!배율,,.../... ('!배율' 생략하면 '!1'임)"/>
+            <TextView
+                android:id="@+id/result_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="계산결과"/>
+        </ScrollView>
 
-    <TextView
-        android:id="@+id/result_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/calc_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClick_calc_button"
-        android:text="계산"/>
+        android:text="계산" />
 
 </LinearLayout>
