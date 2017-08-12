@@ -2,14 +2,17 @@ package com.example.fontjuna.dutchpay;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 public class DutchPayActivity extends AppCompatActivity {
 
@@ -30,12 +33,19 @@ public class DutchPayActivity extends AppCompatActivity {
             + "\n상황3)상황2 에 더해서 3000원을 A와 C가 똑같이 더 낸다면"
             + "\n입력3)5000:A,B!1.5,C/3000:A,C\n"
             + "\n계산결과"
-            + "\n1 : ";
+            + "\n총 금 액 : 8,000"
+            + "\n계산단위 :   100"
+            + "\n걷는금액 : 8,200"
+            + "\n남는금액 :   200\n"
+            + "\n1 : 3,000"
+            + "\n2 : 2,200"
+            + "\n3 : 3,000";
 
     Map<String, Integer> resultNames = new LinkedHashMap<>();
     int mAmount = 0;
     int mRemain = 0;
     int[] mUnits = new int[]{1, 5, 10, 50, 100, 500, 1000};
+    DecimalFormat df = new DecimalFormat(("#,##0"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,19 +76,21 @@ public class DutchPayActivity extends AppCompatActivity {
             RadioButton unitRadioButton = (RadioButton) findViewById(radioButtonId);
             unit = Integer.parseInt(unitRadioButton.getText().toString());
         }
+        int digits = df.format(mAmount).length();
+        Log.d(TAG, digits + "");
         int money = 0;
         String text = "";
-        text += "총 금 액 = " + mAmount;
-        text += "\n계산단위 : " + unit;
+        text += "총 금 액 = " + padNum(mAmount, digits);
+        text += "\n계산단위 : " + padNum(unit, digits);
 
         String temp = "";
         for (String key : resultNames.keySet()) {
             money = (int) ((resultNames.get(key) + unit - 1) / unit) * unit;
-            temp += "\n" + key + " : " + money;
+            temp += "\n" + key + " : " + padNum(money, digits);
             mRemain += money;
         }
-        text += "\n걷는금액 : " + mRemain;
-        text += "\n남는금액 : " + (mRemain - mAmount);
+        text += "\n걷는금액 : " + padNum(mRemain, digits);
+        text += "\n남는금액 : " + padNum(mRemain - mAmount, digits);
         text += "\n" + temp;
 
         result.setText(text);
@@ -128,5 +140,13 @@ public class DutchPayActivity extends AppCompatActivity {
             resultNames.put(key, money);
         }
 
+    }
+
+    public String padNum(int num, int n) {
+        return padLeft(df.format(num), n);
+    }
+
+    public static String padLeft(String s, int n) {
+        return String.format("%1$" + n + "s", s);
     }
 }
