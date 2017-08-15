@@ -86,12 +86,13 @@
             android:padding="4dp"
             android:text="대상입력" />
 
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/goods_edit_text"
+                android:id="@+id/input_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="금액:이름!배율,..." />
@@ -111,6 +112,7 @@
 
             <TextView
                 android:id="@+id/result_text_view"
+                android:textSize="16sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -119,11 +121,21 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/init_button"
+            android:onClick="onClick_init_button"
+            android:text="초기화"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     <Button
         android:id="@+id/calc_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClick_calc_button"
         android:text="계산" />
+    </LinearLayout>
 
 </LinearLayout>
