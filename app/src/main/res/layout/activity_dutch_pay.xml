@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,135 +8,9 @@
     android:orientation="vertical"
     tools:context="com.example.fontjuna.dutchpay.DutchPayActivity">
 
-    <LinearLayout
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#d6d7d7"
-            android:padding="4dp"
-            android:text="계산단위" />
-
-        <RadioGroup
-            android:id="@+id/unit_radio_group"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/unit_1_botton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="1"
-                android:textSize="12sp" />
-
-            <RadioButton
-                android:id="@+id/unit_5_botton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5"
-                android:textSize="12sp" />
-
-            <RadioButton
-                android:id="@+id/unit_10_botton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10"
-                android:textSize="12sp" />
-
-            <RadioButton
-                android:id="@+id/unit_50_botton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="50"
-                android:textSize="12sp" />
-
-            <RadioButton
-                android:id="@+id/unit_100_botton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="100"
-                android:textSize="12sp" />
-
-            <RadioButton
-                android:id="@+id/unit_500_botton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="500"
-                android:textSize="12sp" />
-
-            <RadioButton
-                android:id="@+id/unit_1000_botton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1000"
-                android:textSize="12sp" />
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/input_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#d6d7d7"
-            android:padding="4dp"
-            android:text="대상입력" />
-
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/input_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="금액:이름!배율,..." />
-        </ScrollView>
-
-        <TextView
-            android:id="@+id/information_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#d6d7d7"
-            android:padding="4dp"
-            android:text="입력예시/계산결과" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/result_text_view"
-                android:textSize="16sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-        </ScrollView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/init_button"
-            android:onClick="onClick_init_button"
-            android:text="초기화"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/calc_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClick_calc_button"
-        android:text="계산" />
-    </LinearLayout>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

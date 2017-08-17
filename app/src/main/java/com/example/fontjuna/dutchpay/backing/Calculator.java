@@ -1,4 +1,4 @@
-package com.example.fontjuna.dutchpay;
+package com.example.fontjuna.dutchpay.backing;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -21,7 +21,9 @@ public class Calculator {
     private static final String RATIO = "!";
     private static final String OK_STR = "^[0-9a-zA-Zㄱ-힣!:/,+-.]*$";
 
-    private Map<String, Double> mResultList;
+    private Map<String, Double> mMemberList;  // 단위 정리 전 리스트
+    private Map<String, Integer> mResultList;  // 단위 정리 후 리스트
+    private Map<String, HashMap<String, Double>> mSourceList;  // 입력된 리스트
     private int mUnit = 0;
     private double mAmount = 0.0;
     private int mGather = 0;
@@ -51,7 +53,6 @@ public class Calculator {
         return mError;
     }
 
-    //------------------------------------------------------------------------------------------//
     private void checkBeforeCalcResult(String text) {
         if (text.isEmpty()) {
             mResultText = "입력된 내용이 없습니다.";
@@ -64,9 +65,15 @@ public class Calculator {
         }
     }
 
+    //------------------------------------------------------------------------------------------//
+    // Start Process
+    //------------------------------------------------------------------------------------------//
+
     // 1st Level Proccess
     private void calcResult(String text) {
+        mMemberList = new HashMap<>();
         mResultList = new HashMap<>();
+        mSourceList = new HashMap<>();
         String textResult = "";
         String[] items = text.split(ITEM);
         for (String s : items) {
@@ -111,11 +118,11 @@ public class Calculator {
             double money;
             for (String key : map.keySet()) {
                 money = 0.0;
-                if (mResultList.containsKey(key)) {
-                    money = mResultList.get(key);
+                if (mMemberList.containsKey(key)) {
+                    money = mMemberList.get(key);
                 }
                 money += map.get(key) * everyMoney;
-                mResultList.put(key, money);
+                mMemberList.put(key, money);
             }
         }
     }
@@ -200,15 +207,17 @@ public class Calculator {
         String temp = "";
 
         int value;
-        TreeMap<String, Double> treeMap = new TreeMap<>(mResultList);
+        TreeMap<String, Double> treeMap = new TreeMap<>(mMemberList);
         for (String key : treeMap.keySet()) {
             value = (int) ((treeMap.get(key) * 10 + 5) / 10);
             money = (int) ((double) ((value + mUnit - 1) / mUnit) * mUnit);
             temp += "\n" + key + " : " + padNum(money, digits);
-            mRemain += money;
+            mGather += money;
+            mResultList.put(key, money);
         }
-        mResultText += "\n걷는금액 : " + padNum(mRemain, digits);
-        mResultText += "\n남는금액 : " + padNum(mRemain - mAmount, digits);
+        mRemain = mGather - (int) mAmount;
+        mResultText += "\n걷는금액 : " + padNum(mGather, digits);
+        mResultText += "\n남는금액 : " + padNum(mRemain, digits);
         mResultText += "\n" + temp;
     }
 
