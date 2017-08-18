@@ -82,7 +82,7 @@ public class KidsFragment extends Fragment implements View.OnClickListener {
                 initEditText();
                 break;
         }
-        saveMessage();
+        sendThemMessage();
     }
 
     private void calcEditText() {
@@ -94,13 +94,13 @@ public class KidsFragment extends Fragment implements View.OnClickListener {
 
     private void initEditText() {
         mResultString = "";
-        mInputEditText.setText(mResultString);
+        mInputEditText.setText("");
         mInputEditText.setHint("금액:이름!배율,...");
         mResultTextView.setText("");
         mResultTextView.setHint(INFORMATION);
     }
 
-    private void saveMessage() {
+    private void sendThemMessage() {
         SharedPreferences message = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = message.edit();
         editor.putString(MESSAGE_STR, mResultString);
