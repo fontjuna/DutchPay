@@ -1,6 +1,8 @@
 package com.example.fontjuna.dutchpay.fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -36,9 +38,11 @@ public class KidsFragment extends Fragment implements View.OnClickListener {
             + "\nA : 3,000"
             + "\nB : 2,200"
             + "\nC : 3,000";
+    public static final String MESSAGE_STR = "message";
 
     TextView mResultTextView;
     EditText mInputEditText;
+    String mResultString;
     int mUnit;
 
     public KidsFragment() {
@@ -73,27 +77,46 @@ public class KidsFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.calc_button:
                 calcEditText();
-//                mInputEditText = (EditText) v.findViewById(R.id.input_edit_text);
-//                Calculator cal = new Calculator(mInputEditText.getText().toString(), mUnit);
-//                mResultTextView.setText(cal.getResult());
                 break;
             case R.id.init_button:
                 initEditText();
                 break;
         }
+        saveMessage();
     }
 
     private void calcEditText() {
         mInputEditText = (EditText) getView().findViewById(R.id.input_edit_text);
         Calculator cal = new Calculator(mInputEditText.getText().toString(), getUnit());
-        mResultTextView.setText(cal.getResult());
+        mResultString = cal.getResult();
+        mResultTextView.setText(mResultString);
     }
 
     private void initEditText() {
-        mInputEditText.setText("");
+        mResultString = "";
+        mInputEditText.setText(mResultString);
         mInputEditText.setHint("금액:이름!배율,...");
         mResultTextView.setText("");
         mResultTextView.setHint(INFORMATION);
+    }
+
+    private void saveMessage() {
+        SharedPreferences message = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = message.edit();
+        editor.putString(MESSAGE_STR, mResultString);
+        editor.apply();
+    }
+
+    private void bringMeMessage() {
+        SharedPreferences message = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mResultString = message.getString(MESSAGE_STR, "");
+        mResultTextView.setText(mResultString);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        bringMeMessage();
     }
 
     private int getUnit() {

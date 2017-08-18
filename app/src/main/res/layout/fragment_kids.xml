@@ -128,14 +128,12 @@
             android:id="@+id/init_button"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:onClick="onClick_init_button"
             android:text="초기화"/>
 
         <Button
             android:id="@+id/calc_button"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:onClick="onClick_calc_button"
             android:text="계산"/>
     </LinearLayout>
 

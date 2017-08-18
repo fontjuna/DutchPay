@@ -2,6 +2,7 @@ package com.example.fontjuna.dutchpay.backing;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
@@ -23,7 +24,6 @@ public class Calculator {
 
     private Map<String, Double> mMemberList;  // 단위 정리 전 리스트
     private Map<String, Integer> mResultList;  // 단위 정리 후 리스트
-    private Map<String, HashMap<String, Double>> mSourceList;  // 입력된 리스트
     private int mUnit = 0;
     private double mAmount = 0.0;
     private int mGather = 0;
@@ -49,6 +49,10 @@ public class Calculator {
         return mResultText;
     }
 
+    public Map<String, Integer> getResultList() {
+        return mResultList;
+    }
+
     public boolean isError() {
         return mError;
     }
@@ -72,8 +76,7 @@ public class Calculator {
     // 1st Level Proccess
     private void calcResult(String text) {
         mMemberList = new HashMap<>();
-        mResultList = new HashMap<>();
-        mSourceList = new HashMap<>();
+        mResultList = new LinkedHashMap<>();
         String textResult = "";
         String[] items = text.split(ITEM);
         for (String s : items) {
