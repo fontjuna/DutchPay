@@ -2,8 +2,10 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#b7b7b7</color>
-    <color name="colorAccentCopy">#FF4081</color>
+    <color name="colorAccent">#bcaaa4</color>
+    <color name="colorAccentGrey">#b7b7b7</color>
+    <color name="colorAccentBeige">#fff9c4</color>
+    <color name="colorAccentOrigin">#FF4081</color>
     <color name="colorTabFocused">#d6d7d7</color>
     <color name="colorTabForgot">#fafafa</color>
 </resources>

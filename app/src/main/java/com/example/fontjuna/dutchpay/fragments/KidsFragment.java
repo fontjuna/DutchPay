@@ -47,30 +47,46 @@ public class KidsFragment extends Fragment implements View.OnClickListener {
      */
 
     private static final String INFORMATION
-            = "구분자로 [ : , ! / ] 괄호안의 4개 문자를 사용합니다"
-            + "\n : 걷을금액과 낼사람들을 구분합니다"
-            + "\n , 낼사람들 서로간을 구분 합니다"
-            + "\n ! 그 사람의 배율 (A는 2배이면 A!2로 입력)"
-            + "\n / 걷을 금액이 또 있으면 / 에 이어서 같은 방법으로\n"
-            + "\n상황1)5000원을 A,B,C 이렇게 세사람이 똑 같이 나눈다면"
-            + "\n입력1)5000:A,B,C"
-            + "\n상황2)상황1 에서 B는 다른 사람보다 1.5배 내야 한다면"
-            + "\n입력2)5000:A,B!1.5,C (!를 사용 B!1.5 로 입력)"
-            + "\n상황3)상황2 와 함께 3000원을 A와 C가 똑같이 더 낸다면"
-            + "\n입력3)5000:A,B!1.5,C/3000:A,C\n"
-            + "\n계산결과"
-            + "\n총 금 액 : 8,000"
-            + "\n계산단위 :   100"
-            + "\n걷는금액 : 8,200"
-            + "\n남는금액 :   200\n"
-            + "\nA : 3,000"
-            + "\nB : 2,200"
-            + "\nC : 3,000";
-    public static final String MESSAGE_STR = "message";
+            = "구분자로   :   ,    !   /  4개 문자를 사용합니다"
+
+            + "\n\n▣ 똑 같이 나눌 때( ':' 로 금액과 사람 구분)"
+            + "\n  입력 12000:A,B,C (= A,B,C가 각4,000원)"
+
+            + "\n\n▣ 꼴찌한 횟수 만큼 낼때( '!' 뒤에 횟수(배율))"
+            + "\n  입력 12000:A,B!2,C!3 (!1 은 없어도 같음)"
+            + "\n   (= A:2,000/B:4,000/C:6,000원)"
+
+            + "\n\n▣ 나눌 금액이 두가지 이상일 때( '/' 로 구분)"
+            + "\n  입력 6000:A,B,C/3000:C,D"
+            + "\n    (= A,B:2,000/C:3,500/D:1,500원)"
+
+            + "\n\n▣ C가 3,000원을 더내야 할 때"
+            + "\n  입력 12000-3000:A,B,C/3000:C (9000으로 넣어도 됨)"
+            + "\n    (= A,B:3,000/C:6,000원)"
+
+            + "\n\n▣ C는 3,000원만 낼 때"
+            + "\n  입력 12000-3000:A,B/3000:C (9000으로 넣어도 됨)"
+            + "\n    (= A,B:4,500/C:3,000원)"
+
+            + "\n\n▣ B의 몫을 C가 낼 때"
+            + "\n  입력 12000:A,B!0,C!2 또는 12000:A,C!2"
+            + "\n    (= A:4,000/C:8,000원)"
+
+            + "\n\n▣ B의 몫을 C,D가 낼 때"
+            + "\n  입력 12000:A,C!1.5,D!1.5"
+            + "\n    (= A:3,000/B:0/C,D:4,500원)"
+
+            + "\n\n▣ 찬조금액(=3,000원) 만큼 감해 줄 때"
+            + "\n  입력 12000-3000:A,B,C"
+            + "\n  또는 12000:A,B,C/-3000:A,B,C"
+            + "\n  (= 각 3,000원)"
+            ;
+
+  public static final String MESSAGE_STR = "message";
 
     TextView mResultTextView;
     EditText mInputEditText;
-    String mResultString;
+    String mResultString = "";
     int mUnit;
 
     public KidsFragment() {
@@ -93,6 +109,7 @@ public class KidsFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mInputEditText = (EditText) getView().findViewById(R.id.input_edit_text);
         mResultTextView = (TextView) view.findViewById(R.id.result_text_view);
         mResultTextView.setHint(INFORMATION);
 

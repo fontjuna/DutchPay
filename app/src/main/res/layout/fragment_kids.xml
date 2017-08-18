@@ -15,6 +15,13 @@
 
         <include layout="@layout/assistance_line_accent"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#d6d7d7"
+            android:padding="4dp"
+            android:text="계산 단위"/>
+
         <include layout="@layout/assistance_unit_limit"/>
 
         <include layout="@layout/assistance_line_accent"/>
@@ -25,7 +32,7 @@
             android:layout_height="wrap_content"
             android:background="#d6d7d7"
             android:padding="4dp"
-            android:text="대상입력"/>
+            android:text="대상 입력"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -71,7 +78,7 @@
 
         <Button
             android:id="@+id/init_button"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="초기화"/>
 

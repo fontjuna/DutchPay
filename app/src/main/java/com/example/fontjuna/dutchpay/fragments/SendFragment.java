@@ -93,7 +93,7 @@ public class SendFragment extends Fragment {
         boolean yn = (name.isEmpty() || bank.isEmpty() || account.isEmpty());
 
         String message = (yn ? NO_BANKING :
-                "\n\n각자 몫을 계좌로 입금 하시려면 참고 하세요 ^^"
+                "\n\n각자 몫을 계좌로 입금 하시려면 참고 하세요 ^_^"
                         + "\n예금주 : " + name + "\n은행명 : "
                         + bank + "\n계좌번호 : " + account);
 
