@@ -1,6 +1,8 @@
 package com.example.fontjuna.dutchpay;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,17 +16,26 @@ import com.example.fontjuna.dutchpay.fragments.SendFragment;
 
 public class DutchPayActivity extends AppCompatActivity {
 
+    private static final String MESSAGE_STR = "message";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dutch_pay);
 
+        clearSharedPreference();
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab);
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(adapter);
+    }
 
+    private void clearSharedPreference() {
+        SharedPreferences message = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = message.edit();
+        editor.putString(MESSAGE_STR, "");
+        editor.apply();
     }
 
     private static class MyPagerAdapter extends FragmentPagerAdapter {

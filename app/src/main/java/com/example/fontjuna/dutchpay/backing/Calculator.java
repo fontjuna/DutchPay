@@ -163,6 +163,7 @@ public class Calculator {
     // 3rd-left Level Proccess
     private static double splitAmount(String s) {
         double amount = 0;
+        s = s.replace(",", "");
         String[] plus = ("0" + s).split("[+]");
         for (String i : plus) {
             if (i.contains("-")) {
