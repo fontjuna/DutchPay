@@ -94,23 +94,20 @@ public class KidsFragment extends Fragment implements CommonDutchPay, View.OnCli
     }
 
     private void calcEditText() {
-//        confirm("계산 하기", "더 입력할 것이 없으면\n입력한대로 금액을 계산 합니다.", "취소", "실행");
-//        if (mChoice == 0) {
         mInputEditText = (EditText) getView().findViewById(R.id.input_edit_text);
+//        Parsing cal = new Parsing(mInputEditText.getText().toString(), getUnit());
+//        mInputExpression = cal.getText();
         Calculator cal = new Calculator(mInputEditText.getText().toString(), getUnit());
         mInputExpression = cal.getTextResult();
         mResultTextView.setText(mInputExpression);
-//    }
     }
 
     private void initEditText() {
-//        confirm("초기화 하기", "다른 내용을 입력 하시려면\n계산 결과를 지우고 입력을 초기화 합니다.", "취소", "실행");
         mInputExpression = "";
         mInputEditText.setText("");
         mResultTextView.setText("");
         mInputEditText.setHint(HINT_EXPRESSION);
         mResultTextView.setHint(HINT_INFORMATION);
-//        }
     }
 
     private void setInputExpression() {
