@@ -37,9 +37,54 @@ public class Title implements CommonDutchPay {
         setUpDataFromExpression();
     }
 
+    public boolean isError() {
+        return mError;
+    }
+
+    public String getMessage() {
+        return mMessage;
+    }
+
+    public double get(String name) {
+        return mResultsMap.get(name);
+    }
+
+    public String getTitle() {
+        return mTitle;
+    }
+
+    public void setTitle(String title) {
+        mTitle = title;
+    }
+
+    public ArrayList<Double> getAmountList() {
+        return mAmountList;
+    }
+
+    public HashMap<String, Double> getMembersMap() {
+        return mMembersMap;
+    }
+
+    public LinkedHashMap<String, Double> getResultsMap() {
+        return mResultsMap;
+    }
+
+    public double getTotal() {
+        return mSumMoney;
+    }
+
+    public double getRatio() {
+        return mSumRatio;
+    }
+
+    public double getUnitPrice() {
+        return mUnitPrice;
+    }
+
     private void setUpDataFromExpression() {
         mAmountList = new ArrayList<>();
         mMembersMap = new HashMap<>();
+        mResultsMap = new LinkedHashMap<>();
         String remainText = checkAndFix(mExpression);
         if (!isError()) {
             remainText = extractTitle(remainText);
@@ -90,7 +135,7 @@ public class Title implements CommonDutchPay {
             expression = expression.replace(" ", "");
             expression = expression.replace(MINUS + PLUS, MINUS);
             expression = expression.replace(PLUS + MINUS, MINUS);
-            if (!Pattern.matches(VALID_CHARACTERS_ALL.replace(TITLEnMONEY, ""), expression)) {
+            if (!Pattern.matches(VALID_CHARACTERS_ALL, expression)) {
                 mMessage = ERROR_WRONG_EXPRESSION;
                 mError = true;
             }
@@ -222,47 +267,4 @@ public class Title implements CommonDutchPay {
         }
     }
 
-    public boolean isError() {
-        return mError;
-    }
-
-    public String getMessage() {
-        return mMessage;
-    }
-
-    public double get(String name) {
-        return mResultsMap.get(name);
-    }
-
-    public String getTitle() {
-        return mTitle;
-    }
-
-    public void setTitle(String title) {
-        mTitle = title;
-    }
-
-    public ArrayList<Double> getAmountList() {
-        return mAmountList;
-    }
-
-    public HashMap<String, Double> getMembersMap() {
-        return mMembersMap;
-    }
-
-    public LinkedHashMap<String, Double> getResultsMap() {
-        return mResultsMap;
-    }
-
-    public double getTotal() {
-        return mSumMoney;
-    }
-
-    public double getRatio() {
-        return mSumRatio;
-    }
-
-    public double getUnitPrice() {
-        return mUnitPrice;
-    }
 }

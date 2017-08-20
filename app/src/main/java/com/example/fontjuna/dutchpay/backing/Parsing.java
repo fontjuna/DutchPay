@@ -103,6 +103,7 @@ public class Parsing implements CommonDutchPay {
         for (String string : strings) {
             Title items = new Title(string);
             if (items.isError()) {
+                mError = true;
                 mErrorMessage = items.getMessage();
                 break;
             } else {
