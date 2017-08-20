@@ -1,5 +1,6 @@
 package com.example.fontjuna.dutchpay.fragments;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,82 +13,19 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fontjuna.dutchpay.R;
 import com.example.fontjuna.dutchpay.backing.Calculator;
+import com.example.fontjuna.dutchpay.backing.CommonDutchPay;
 
-public class KidsFragment extends Fragment implements View.OnClickListener {
+public class KidsFragment extends Fragment implements CommonDutchPay, View.OnClickListener {
 
-    /***
-     * 똑 같이 나눌경우 (12,000원을 A,B,C 세사람이 분배)
-     * 12000:A,B,C
-     *
-     * 꼴찌한 횟수만큼 내기 (총액 6,000원 게임당 1,000원, A=1회, B=2회, C=3회)
-     * 6000:A,B!2,C!3         (6,000원중 A=1,000원, B=2,000원, C=3,000원)
-     *
-     * 낼 금액이 두가지 이상인 경우("/"로 구분)
-     * 6000:A,B,C/3000:A,D    (A=3,500원, B,C=2,000원, D=1,500원)
-     *
-     * 찬조금액을 빼고 계산할 경우 (총액이 10,000원 이고 찬조금이 1,000원 가정)
-     * 10000-1000:A,B,C       (9,000원중 A,B,C=3,000원)
-     * 9000:A,B,C             (9,000원중 A,B,C=3,000원)
-     *
-     * 특정인이 정해진 금액을 더 낼 경우
-     * 5000-1000:A,B,C/1000:C (5,000원중 C가 1,000원을 더 낸다.| A,B=1,333원,C=2,333원)
-     * 4000:A,B,C/1000:C      (5,000원중 C가 1,000원을 더 낸다.| A,B=1,333원,C=2,333원)
-     * 5000:A,B,C/1000:C      (6,000원중 C가 1,000원을 더 낸다.| A,B=1,667원,C=2,667원)
-     *
-     * 특정인이 정해진 금액만 낼 경우
-     * 5000-1000:A,B/1000:C (5,000원중 C는 1,000원만 낸다.| A,B=2,000원,C=1,000원)
-     * 4000:A,B/1000:C      (5,000원중 C는 1,000원만 낸다.| A,B=2,000원,C=1,000원)
-     *
-     * 특정인이 다른 사람 몫까지 낼 경우 (C의 몫을 다른 사람이 낸다는 가정)
-     * 10000:A,B,C!0,D!2      (10,000원 중 A,B=2,500원, D=5,000원) => 10000:A,B,D!2
-     * 10000:A,B!1.5,C!0,D!1.5(10,000원 중 A=2,500원, B,D=2,750원) => 10000:A,B!1.5,D!1.5
-     */
-
-    private static final String INFORMATION
-            = "구분자로   :   ,    !   /  4개 문자를 사용합니다"
-
-            + "\n\n▣ 똑 같이 나눌 때( ':' 로 금액과 사람 구분)"
-            + "\n  입력 12000:A,B,C (= A,B,C가 각4,000원)"
-
-            + "\n\n▣ 꼴찌한 횟수 만큼 낼때( '!' 뒤에 횟수(배율))"
-            + "\n  입력 12000:A,B!2,C!3 (!1 은 없어도 같음)"
-            + "\n   (= A:2,000/B:4,000/C:6,000원)"
-
-            + "\n\n▣ 나눌 금액이 두가지 이상일 때( '/' 로 구분)"
-            + "\n  입력 6000:A,B,C/3000:C,D"
-            + "\n    (= A,B:2,000/C:3,500/D:1,500원)"
-
-            + "\n\n▣ C가 3,000원을 더내야 할 때"
-            + "\n  입력 12000-3000:A,B,C/3000:C (9000으로 넣어도 됨)"
-            + "\n    (= A,B:3,000/C:6,000원)"
-
-            + "\n\n▣ C는 3,000원만 낼 때"
-            + "\n  입력 12000-3000:A,B/3000:C (9000으로 넣어도 됨)"
-            + "\n    (= A,B:4,500/C:3,000원)"
-
-            + "\n\n▣ B의 몫을 C가 낼 때"
-            + "\n  입력 12000:A,B!0,C!2 또는 12000:A,C!2"
-            + "\n    (= A:4,000/C:8,000원)"
-
-            + "\n\n▣ B의 몫을 C,D가 낼 때"
-            + "\n  입력 12000:A,C!1.5,D!1.5"
-            + "\n    (= A:3,000/B:0/C,D:4,500원)"
-
-            + "\n\n▣ 찬조금액(=3,000원) 만큼 감해 줄 때"
-            + "\n  입력 12000-3000:A,B,C"
-            + "\n  또는 12000:A,B,C/-3000:A,B,C"
-            + "\n  (= 각 3,000원)"
-            ;
-
-  public static final String MESSAGE_STR = "message";
-
-    TextView mResultTextView;
-    EditText mInputEditText;
-    String mResultString = "";
-    int mUnit;
+    private TextView mResultTextView;
+    private EditText mInputEditText;
+    private String mInputExpression = "";
+    private int mUnit = 0;
+    private int mChoice = -1;
 
     public KidsFragment() {
         // Required empty public constructor
@@ -111,7 +49,7 @@ public class KidsFragment extends Fragment implements View.OnClickListener {
 
         mInputEditText = (EditText) getView().findViewById(R.id.input_edit_text);
         mResultTextView = (TextView) view.findViewById(R.id.result_text_view);
-        mResultTextView.setHint(INFORMATION);
+        mResultTextView.setHint(HINT_INFORMATION);
 
         view.findViewById(R.id.calc_button).setOnClickListener(this);
         view.findViewById(R.id.init_button).setOnClickListener(this);
@@ -119,49 +57,79 @@ public class KidsFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+//        Confirm confirm = new Confirm("계산하기", "입력한대로 금액을 나눕니다.", "취소", "실행");
+//        confirm.getMiaADF().show(getActivity().getSupportFragmentManager(),"confirm");
+//        if (confirm.getChoice() == 0) {
         switch (v.getId()) {
             case R.id.calc_button:
                 calcEditText();
                 break;
             case R.id.init_button:
-                initEditText();
+                confirm("초기화 하기",
+                        "다른 내용을 입력 하시려면\n계산 결과를 지우고 입력을 초기화 합니다.",
+                        "취소", "실행");
+//                initEditText();
                 break;
         }
-        sendThemMessage();
+        setInputExpression();
+    }
+
+    private void confirm(String title, String message, final String negative, final String positive) {
+        MiaADF miaADF = MiaADF.newInstance(title, message, negative, positive,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        switch (i) {
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                Toast.makeText(getContext(), negative, Toast.LENGTH_SHORT).show();
+                                break;
+                            case DialogInterface.BUTTON_POSITIVE:
+                                initEditText();
+                                Toast.makeText(getContext(), positive, Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                });
+        miaADF.show(getActivity().getSupportFragmentManager(), "choice");
     }
 
     private void calcEditText() {
+//        confirm("계산 하기", "더 입력할 것이 없으면\n입력한대로 금액을 계산 합니다.", "취소", "실행");
+//        if (mChoice == 0) {
         mInputEditText = (EditText) getView().findViewById(R.id.input_edit_text);
         Calculator cal = new Calculator(mInputEditText.getText().toString(), getUnit());
-        mResultString = cal.getResult();
-        mResultTextView.setText(mResultString);
+        mInputExpression = cal.getTextResult();
+        mResultTextView.setText(mInputExpression);
+//    }
     }
 
     private void initEditText() {
-        mResultString = "";
+//        confirm("초기화 하기", "다른 내용을 입력 하시려면\n계산 결과를 지우고 입력을 초기화 합니다.", "취소", "실행");
+        mInputExpression = "";
         mInputEditText.setText("");
-        mInputEditText.setHint("금액:이름!배율,...");
         mResultTextView.setText("");
-        mResultTextView.setHint(INFORMATION);
+        mInputEditText.setHint(HINT_EXPRESSION);
+        mResultTextView.setHint(HINT_INFORMATION);
+//        }
     }
 
-    private void sendThemMessage() {
+    private void setInputExpression() {
         SharedPreferences message = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = message.edit();
-        editor.putString(MESSAGE_STR, mResultString);
+        editor.putString(INPUT_EXPRESSION, mInputExpression);
         editor.apply();
     }
 
-    private void bringMeMessage() {
+    private void getInputExpression() {
         SharedPreferences message = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        mResultString = message.getString(MESSAGE_STR, "");
-        mResultTextView.setText(mResultString);
+        mInputExpression = message.getString(INPUT_EXPRESSION, "");
+        mResultTextView.setText(mInputExpression);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        bringMeMessage();
+        getInputExpression();
     }
 
     private int getUnit() {
@@ -176,4 +144,5 @@ public class KidsFragment extends Fragment implements View.OnClickListener {
         }
         return unit;
     }
+
 }

@@ -10,13 +10,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.fontjuna.dutchpay.backing.CommonDutchPay;
 import com.example.fontjuna.dutchpay.fragments.KidsFragment;
 import com.example.fontjuna.dutchpay.fragments.PapaFragment;
 import com.example.fontjuna.dutchpay.fragments.SendFragment;
 
-public class DutchPayActivity extends AppCompatActivity {
-
-    private static final String MESSAGE_STR = "message";
+public class DutchPayActivity extends AppCompatActivity implements CommonDutchPay{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,7 @@ public class DutchPayActivity extends AppCompatActivity {
     private void clearSharedPreference() {
         SharedPreferences message = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = message.edit();
-        editor.putString(MESSAGE_STR, "");
+        editor.putString(INPUT_EXPRESSION, "");
         editor.apply();
     }
 
@@ -54,8 +53,6 @@ public class DutchPayActivity extends AppCompatActivity {
                 case 1:
                     return new PapaFragment();
                 case 2:
-//                    return new ItemFragment();
-//                case 3:
                     return new SendFragment();
             }
             return new KidsFragment();
@@ -70,20 +67,22 @@ public class DutchPayActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0: {
-                    return "어리신 용";
+                    return TAB_TITLE_1;
                 }
                 case 1: {
-                    return "어르신 용";
+                    return TAB_TITLE_2;
                 }
                 case 2: {
-//                    return "결과 상세";
-//                }
-//                case 3: {
-                    return "결과 공유";
+                    return TAB_TITLE_3;
                 }
             }
             return super.getPageTitle(position);
         }
     }
+
+//    private void testDialog() {
+//        Confirm confirm = new Confirm("테스ㅡ트", "알아보세요!", "ok", "no");
+//
+//    }
 
 }

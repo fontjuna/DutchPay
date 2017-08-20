@@ -15,14 +15,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.fontjuna.dutchpay.R;
+import com.example.fontjuna.dutchpay.backing.CommonDutchPay;
 
-public class SendFragment extends Fragment {
+public class SendFragment extends Fragment implements CommonDutchPay {
 
-    public static final String MESSAGE_STR = "message";
-    public static final String NO_BANKING =
-            "\n\n(이 내용은 메세지에서 제외 됩니다."
-                    + "\n계좌 정보를 같이 보내시려면"
-                    + "\n예금주, 은행명, 계좌번호가 있어야 합니다.)";
     TextView mMsgText;
     String mMessage;
     String mBanking;
@@ -42,7 +38,7 @@ public class SendFragment extends Fragment {
     public void onResume() {
         super.onResume();
         SharedPreferences message = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        mMessage = message.getString(MESSAGE_STR, "");
+        mMessage = message.getString(INPUT_EXPRESSION, "");
         mMsgText.setText(mMessage);
     }
 
