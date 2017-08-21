@@ -27,11 +27,6 @@ public class Title implements CommonDutchPay {
     private boolean mError = false;
     private String mMessage = "";
 
-    public Title() {
-        mError = true;
-        mMessage = ERROR_EMPTY_INPUT;
-    }
-
     public Title(String expression) {
         mExpression = expression;
         setUpDataFromExpression();

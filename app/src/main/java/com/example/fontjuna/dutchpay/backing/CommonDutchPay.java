@@ -59,13 +59,14 @@ public interface CommonDutchPay {
     public static final String VALID_CHARACTERS_ALL = String.format("^[%s]*$", TEXT_CHARS);
     public static final String VALID_CHARACTERS_TEXT = String.format("^[%s]*$", TEXT);
     public static final String VALID_CHARACTERS_RATIO = String.format("^[%s]*$", DIGIT + DOT);
-    public static final String VALID_CHARACTERS_MEMBER = String.format("^[%s]*$", TEXT + MEMBERnMEMBER + MEMBERnRATIO + DOT);
+    public static final String VALID_CHARACTERS_MEMBER = String.format("^[%s]*$", TEXT + MEMBERnMEMBER + MEMBERnRATIO + DOT + MEMBER2MEMBER);
     public static final String VALID_CHARACTERS_AMOUNT = String.format("^[%s]*$", DIGIT + DOT + COMMA + PLUS + MINUS); // MINUS가 젤 뒤로 와야 작동함
 
     // 메세지
     public static final String ERROR_WRONG_EXPRESSION = "수식에 불필요한 문자가 들어 있습니다.";
     public static final String ERROR_EMPTY_INPUT = "입력된 내용이 없습니다.";
     public static final String ERROR_INVALID = "입력된 내용이 규칙에 맞지 않습니다.";
+    public static final String ERROR_DELIMITER = "구분자 사용이 잘 못 되었습니다.";
     public static final String ERROR_IN_MEMBER = "나눌 인원에 불필요한 문자가 있습니다.";
     public static final String ERROR_IN_RATIO = "나눌 배율에 불필요한 문자가 있습니다.";
     public static final String ERROR_IN_AMOUNT = "금액에 불필요한 문자가 있습니다.";
@@ -149,5 +150,9 @@ public interface CommonDutchPay {
     public static final String TAB_TITLE_1 = "어리신 용";
     public static final String TAB_TITLE_2 = "어르신 용";
     public static final String TAB_TITLE_3 = "결과 공유";
+
+//    public boolean isError();
+//    public String  getError();
+
 
 }
