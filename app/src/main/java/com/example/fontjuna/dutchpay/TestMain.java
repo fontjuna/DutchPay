@@ -14,11 +14,10 @@ public class TestMain {
 
         System.out.println("Error ? " + parsing.isError());
         System.out.println("Unit : " + parsing.getUnit());
-        if (parsing.isError()) {
-            System.out.println("Error : " + parsing.getErrorMessage());
-        } else {
-            System.out.println("Result : " + parsing.getText());
-        }
+        System.out.println("\nAmount : " + parsing.getAmount());
+        System.out.println("Gather : " + parsing.getGather());
+        System.out.println("Remain : " + parsing.getRemain());
+        System.out.println("\nResult : " + parsing.getText());
 
 
 //        System.out.println(new Calculator("5000:a,b!1.5,c/3000:a,c", 10).getTextResult());
