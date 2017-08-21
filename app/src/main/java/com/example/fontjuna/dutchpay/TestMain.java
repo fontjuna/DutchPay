@@ -8,13 +8,17 @@ import com.example.fontjuna.dutchpay.backing.Parsing;
 
 public class TestMain {
     public static void main(String[] args) {
-        String msg = "test:53000@a,b,x!2";
+        String msg = "test:53000@a,b,x!2/60000@a,x,y!1.5";
 
         Parsing parsing = new Parsing(msg, 10);
 
         System.out.println("Error ? " + parsing.isError());
-        System.out.println("Msg : " + parsing.getText());
-
+        System.out.println("Unit : " + parsing.getUnit());
+        if (parsing.isError()) {
+            System.out.println("Error : " + parsing.getErrorMessage());
+        } else {
+            System.out.println("Result : " + parsing.getText());
+        }
 
 
 //        System.out.println(new Calculator("5000:a,b!1.5,c/3000:a,c", 10).getTextResult());
