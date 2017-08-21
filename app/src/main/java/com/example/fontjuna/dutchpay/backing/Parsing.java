@@ -1,5 +1,6 @@
 package com.example.fontjuna.dutchpay.backing;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
@@ -20,7 +21,7 @@ public class Parsing implements CommonDutchPay {
     private static final String TAG = Parsing.class.getSimpleName();
 
     private boolean mError = false;
-    private String mErrorMessage = "";
+    private String mOutText = "";
 
     private int mUnit = 1;
     private ArrayList<Title> mTitles;
@@ -29,7 +30,10 @@ public class Parsing implements CommonDutchPay {
     private int mAmount = 0;
     private int mGather = 0;
     private int mRemain = 0;
-    private String mOutText = "";
+
+    private String mTitle;
+    private DecimalFormat df = new DecimalFormat("000");
+//    private String mOutText = "";
 
     //==========================================================================================//
 
@@ -42,13 +46,18 @@ public class Parsing implements CommonDutchPay {
     }
 
     private void makeListAndResult() {
-        String tempText = "";
+        // 결과를 개인별 합산및 리스트로 만들기
+        boolean fistTime = true;
         double dblVal;
         mAmount = 0;
         mGather = 0;
         mRemain = 0;
         mMemberMap = new TreeMap<>();
         for (Title t : mTitles) {
+            if (fistTime) {
+                mTitle = t.getTitle();
+                fistTime = false;
+            }
             mAmount += t.getTotal();
             for (String key : t.getResultsMap().keySet()) {
                 dblVal = 0.0;
@@ -57,9 +66,11 @@ public class Parsing implements CommonDutchPay {
                 }
                 mMemberMap.put(key, dblVal + t.get(key));
             }
-
         }
+
+        // 결과를 담은 리스트를 이용 텍스트로 저장
         int intVal;
+        String tempText = "";
         mResultMap = new TreeMap<>();
         for (String key : mMemberMap.keySet()) {
             intVal = (int) ((mMemberMap.get(key) * 10 + 5) / 10);
@@ -69,28 +80,41 @@ public class Parsing implements CommonDutchPay {
             tempText += "\n" + key + " : " + intVal;
         }
         mRemain = mAmount - mGather;
-        mOutText = tempText;
+        mOutText = mTitle + tempText;
     }
 
     public boolean isError() {
         return mError;
     }
 
-    public String getErrorMessage() {
-        return mErrorMessage;
-    }
-
     public int getUnit() {
         return mUnit;
     }
 
-    public ArrayList<Title> getItems() {
-        return mTitles;
+    public String getTitle() {
+        return mTitle;
     }
 
     public String getText() {
         return mOutText;
     }
+
+    public int getAmount() {
+        return mAmount;
+    }
+
+    public int getGather() {
+        return mGather;
+    }
+
+    public int getRemain() {
+        return mRemain;
+    }
+
+    public ArrayList<Title> getTitles() {
+        return mTitles;
+    }
+
 //------------------------------------------------------------------------------------------//
     // Start Process
     //------------------------------------------------------------------------------------------//
@@ -98,19 +122,23 @@ public class Parsing implements CommonDutchPay {
     // 1st Level Proccess
     private void parseInputExpression(String text) {
         int autoSeq = 1;
+        mTitle = "";
         mTitles = new ArrayList<>();
         String[] strings = splitInput2ItemAndItem(text); //s.split(ITEM);
         for (String string : strings) {
-            Title items = new Title(string);
-            if (items.isError()) {
+            Title title = new Title(string);
+            if (title.isError()) {
                 mError = true;
-                mErrorMessage = items.getMessage();
+                mOutText = title.getMessage();
                 break;
             } else {
-                if (items.getTitle().isEmpty()) {
-                    items.setTitle("Item" + autoSeq++);
+                if (title.getTitle().isEmpty()) {
+                    title.setTitle("DutchPay" + df.format(autoSeq++));
                 }
-                mTitles.add(items);
+                mTitles.add(title);
+                if (mTitle.isEmpty()) {
+                    mTitle = title.getTitle();
+                }
             }
         }
     }
@@ -123,7 +151,7 @@ public class Parsing implements CommonDutchPay {
 
     private String checkAndRemoveIllegal(String text) {
         if (text.isEmpty()) {
-            mErrorMessage = ERROR_EMPTY_INPUT;
+            mOutText = ERROR_EMPTY_INPUT;
             mError = true;
             text = "";
         } else {
@@ -133,11 +161,22 @@ public class Parsing implements CommonDutchPay {
             text = text.replace(MINUS + PLUS, MINUS);
             text = text.replace(PLUS + MINUS, MINUS);
             if (!Pattern.matches(VALID_CHARACTERS_ALL, text)) {
-                mErrorMessage = ERROR_WRONG_EXPRESSION;
+                mOutText = ERROR_WRONG_EXPRESSION;
                 mError = true;
             }
         }
         return text;
     }
 
+    private int getDigits() {
+        return df.format(mAmount).length();
+    }
+
+    private String padNum(double num, int n) {
+        return padLeft(df.format(num), n);
+    }
+
+    private static String padLeft(String s, int n) {
+        return String.format("%1$" + n + "s", s).replace(" ", "_");
+    }
 }
