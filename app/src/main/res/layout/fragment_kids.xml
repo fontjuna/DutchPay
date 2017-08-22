@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_margin="8dp"
     android:orientation="vertical"
-    tools:context="com.example.fontjuna.dutchpay.fragments.KidsFragment">
+    tools:context="com.nohseunghwa.fontjuna.dutchpay.fragments.KidsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
