@@ -5,5 +5,6 @@ package com.example.fontjuna.dutchpay.classes_pack;
  */
 
 public class Spliter {
+    private boolean mError;
 
 }
