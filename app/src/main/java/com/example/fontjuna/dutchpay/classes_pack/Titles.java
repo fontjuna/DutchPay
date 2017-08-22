@@ -2,9 +2,12 @@ package com.example.fontjuna.dutchpay.classes_pack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import static com.example.fontjuna.dutchpay.backing.CommonDutchPay.ERROR_EMPTY_INPUT;
+import static com.example.fontjuna.dutchpay.backing.CommonDutchPay.ERROR_WRONG_EXPRESSION;
 import static com.example.fontjuna.dutchpay.backing.CommonDutchPay.ITEMnITEM;
+import static com.example.fontjuna.dutchpay.backing.CommonDutchPay.VALID_CHARACTERS_ALL;
 
 /**
  * Created by fontjuna on 2017-08-22.
@@ -43,6 +46,21 @@ public class Titles {
             Elements elements = new Elements(source);
             TitleData titleData = new TitleData(title, amount, elements);
             mSourceList.add(titleData);
+        }
+    }
+
+    private String[] Items(String source) {
+        if (!Pattern.matches(VALID_CHARACTERS_ALL, source)) {
+            mError = true;
+            mMessage = ERROR_WRONG_EXPRESSION;
+            return new String[]{};
+        } else {
+            String[] items = source.split(ITEMnITEM);
+            if (items.length == 0) {
+                mError = true;
+                mMessage = ERROR_EMPTY_INPUT;
+            }
+            return items;
         }
     }
 
