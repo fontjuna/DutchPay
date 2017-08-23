@@ -15,7 +15,7 @@ import com.nohseunghwa.gallane.fragments.KidsFragment;
 import com.nohseunghwa.gallane.fragments.PapaFragment;
 import com.nohseunghwa.gallane.fragments.SendFragment;
 
-public class DutchPayActivity extends AppCompatActivity implements CommonDutchPay {
+public class GallaActivity extends AppCompatActivity implements CommonDutchPay {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
