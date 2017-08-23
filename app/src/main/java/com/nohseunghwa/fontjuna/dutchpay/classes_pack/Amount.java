@@ -21,7 +21,7 @@ import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.VALID_CHA
 
 public class Amount {
     private String mSource;
-    private ArrayList<Double> mAmount;
+    private ArrayList<Double> mAmountDatas;
     private String mText;
     private boolean mError;
     private String mMessage;
@@ -32,7 +32,7 @@ public class Amount {
         mMessage = ERROR_EMPTY_INPUT + "(" + mSource + ")";
         mSource = source;
         if (!isError()) {
-            mAmount = new ArrayList<>();
+            mAmountDatas = new ArrayList<>();
             mMessage = "";
             mText = "";
             mTotal = 0.0;
@@ -75,7 +75,7 @@ public class Amount {
                 } else {
                     extractAmount(source);
                     if (!isError()) {
-                        for (double d : mAmount) {
+                        for (double d : mAmountDatas) {
                             mTotal += d;
                         }
                     }
@@ -101,7 +101,7 @@ public class Amount {
             if (i.contains(MINUS)) {
                 parseMinus(i);
             } else {
-                mAmount.add(Double.parseDouble(i));
+                mAmountDatas.add(Double.parseDouble(i));
                 mText += (mText.isEmpty() ? "" : "+") + i;
             }
         }
@@ -113,7 +113,7 @@ public class Amount {
         s = s.replace(MINUS, COMMA + MINUS);
         String[] minus = ("0" + s).split(COMMA);
         for (int j = 0; j < minus.length; j++) {
-            mAmount.add(Double.parseDouble(minus[j]));
+            mAmountDatas.add(Double.parseDouble(minus[j]));
             mText += (mText.isEmpty() ? "" : "+") + minus[j];
         }
     }
@@ -135,11 +135,11 @@ public class Amount {
     }
 
     public int getCount() {
-        return mAmount.size();
+        return mAmountDatas.size();
     }
 
-    public ArrayList<Double> getAmount() {
-        return mAmount;
+    public ArrayList<Double> getAmountDatas() {
+        return mAmountDatas;
     }
 
     public String getText() {

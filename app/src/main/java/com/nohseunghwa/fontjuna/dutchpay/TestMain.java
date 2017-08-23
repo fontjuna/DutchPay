@@ -74,7 +74,7 @@ public class TestMain {
         System.out.println("Total : " + obj.getTotal());
         if (!obj.isError()) {
             int key = 1;
-            for (Double d : obj.getAmount()) {
+            for (Double d : obj.getAmountDatas()) {
                 System.out.println(key++ + " : " + d);
             }
         }

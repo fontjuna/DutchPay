@@ -26,7 +26,7 @@ import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.VALID_CHA
 public class Elements {
     private String mSource;
     private String mText;
-    private HashMap<String, Double> mElements;
+    private HashMap<String, Double> mElementDatas;
     private boolean mError;
     private String mMessage;
     private double mSumRatio;
@@ -36,7 +36,7 @@ public class Elements {
         mMessage = ERROR_EMPTY_INPUT + "(" + mSource + ")";
         mSource = source;
         if (!isError()) {
-            mElements = new HashMap<>();
+            mElementDatas = new HashMap<>();
             mMessage = "";
             mText = "";
             mSumRatio = 0.0;
@@ -56,23 +56,23 @@ public class Elements {
         return mSource;
     }
 
-    public HashMap<String, Double> getElements() {
-        return isError() ? null : mElements;
+    public HashMap<String, Double> getElementDatas() {
+        return isError() ? null : mElementDatas;
     }
 
     public TreeMap<String, Double> getAscending() {
-        TreeMap<String, Double> map = new TreeMap<>(mElements);
+        TreeMap<String, Double> map = new TreeMap<>(mElementDatas);
         return isError() ? null : map;
     }
 
     public TreeMap<String, Double> getDescending() {
         TreeMap<String, Double> map = new TreeMap<>(Collections.<String>reverseOrder());
-        map.putAll(mElements);
+        map.putAll(mElementDatas);
         return isError() ? null : map;
     }
 
     public int getCount() {
-        return isError() ? -1 : mElements.size();
+        return isError() ? -1 : mElementDatas.size();
     }
 
     public double getSumRatio() {
@@ -80,7 +80,7 @@ public class Elements {
     }
 
     public double getRatio(String name) {
-        return isError() ? -1 : mElements.get(name);
+        return isError() ? -1 : mElementDatas.get(name);
     }
 
     private String checkAndFix(String source) {
@@ -149,10 +149,10 @@ public class Elements {
                     } else {
                         value = 0.0;
                         key = element.getName();
-                        if (mElements.containsKey(key)) {
-                            value = mElements.get(key);
+                        if (mElementDatas.containsKey(key)) {
+                            value = mElementDatas.get(key);
                         }
-                        mElements.put(key, value + element.getRatio());
+                        mElementDatas.put(key, value + element.getRatio());
                         mText += (mText.isEmpty() ? "" : ",") + key +
                                 (element.getRatio() == 1.0 ? "" : "!" + element.getRatio());
                     }
@@ -193,10 +193,10 @@ public class Elements {
                     for (int i = from; i <= to; i++) {
                         key = i + "";
                         value = 0.0;
-                        if (mElements.containsKey(key)) {
-                            value = mElements.get(key);
+                        if (mElementDatas.containsKey(key)) {
+                            value = mElementDatas.get(key);
                         }
-                        mElements.put(key, value + ratio);
+                        mElementDatas.put(key, value + ratio);
                         mText += (mText.isEmpty() ? "" : ",") + key +
                                 (ratio == 1.0 ? "" : "!" + ratio);
                     }

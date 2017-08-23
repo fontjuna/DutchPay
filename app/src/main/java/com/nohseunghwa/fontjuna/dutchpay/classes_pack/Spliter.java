@@ -46,7 +46,7 @@ public class Spliter {
             amount = td.getAmounts().getTotal();
             sumRaio = td.getElements().getSumRatio();
             unitPrice = amount / sumRaio;
-            for (String key : td.getElements().getElements().keySet()) {
+            for (String key : td.getElements().getElementDatas().keySet()) {
                 value = 0.0;
                 if (mMember.containsKey(key)) {
                     value = mMember.get(key);
