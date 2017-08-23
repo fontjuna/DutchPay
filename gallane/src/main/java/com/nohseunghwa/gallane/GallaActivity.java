@@ -6,16 +6,18 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.nohseunghwa.gallane.backing.CommonDutchPay;
 import com.nohseunghwa.gallane.fragments.KidsFragment;
-import com.nohseunghwa.gallane.fragments.PapaFragment;
 import com.nohseunghwa.gallane.fragments.SendFragment;
 
-public class GallaActivity extends AppCompatActivity implements CommonDutchPay {
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.INPUT_EXPRESSION;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.TAB_TITLE_1;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.TAB_TITLE_3;
+
+public class GallaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +27,29 @@ public class GallaActivity extends AppCompatActivity implements CommonDutchPay {
         clearSharedPreference();
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab);
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
+        final MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
+
         tabLayout.setupWithViewPager(viewPager);
+//        viewPager.setOffscreenPageLimit(0);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 1) {
+                    SendFragment fragment = (SendFragment) adapter.getItem(position);
+                    fragment.restoreResult();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         viewPager.setAdapter(adapter);
     }
 
@@ -37,12 +60,14 @@ public class GallaActivity extends AppCompatActivity implements CommonDutchPay {
         editor.apply();
     }
 
-    private static class MyPagerAdapter extends FragmentPagerAdapter {
+    private static class MyPagerAdapter extends FragmentStatePagerAdapter {
 
-        public static final int PAGE_NUM = 3;
+        public static final int PAGE_NUM =2;
+        private SendFragment mSendFragment;
 
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
+            mSendFragment = new SendFragment();
         }
 
         @Override
@@ -50,10 +75,10 @@ public class GallaActivity extends AppCompatActivity implements CommonDutchPay {
             switch (position) {
                 case 0:
                     return new KidsFragment();
+//                case 1:
+//                    return new PapaFragment();
                 case 1:
-                    return new PapaFragment();
-                case 2:
-                    return new SendFragment();
+                    return mSendFragment;
             }
             return new KidsFragment();
         }
@@ -70,19 +95,14 @@ public class GallaActivity extends AppCompatActivity implements CommonDutchPay {
                     return TAB_TITLE_1;
                 }
                 case 1: {
-                    return TAB_TITLE_2;
-                }
-                case 2: {
+//                    return TAB_TITLE_2;
+//                }
+//                case 2: {
                     return TAB_TITLE_3;
                 }
             }
             return super.getPageTitle(position);
         }
     }
-
-//    private void testDialog() {
-//        Confirm confirm = new Confirm("테스ㅡ트", "알아보세요!", "ok", "no");
-//
-//    }
 
 }

@@ -15,9 +15,12 @@ import android.widget.TextView;
 
 import com.nohseunghwa.gallane.R;
 import com.nohseunghwa.gallane.backing.Calculator;
-import com.nohseunghwa.gallane.backing.CommonDutchPay;
 
-public class KidsFragment extends Fragment implements CommonDutchPay, View.OnClickListener {
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.HINT_EXPRESSION;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.HINT_INFORMATION;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.INPUT_EXPRESSION;
+
+public class KidsFragment extends Fragment implements  View.OnClickListener {
 
     private TextView mResultTextView;
     private EditText mInputEditText;

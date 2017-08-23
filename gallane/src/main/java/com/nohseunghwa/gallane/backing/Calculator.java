@@ -7,6 +7,26 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.COMMA;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.ERROR_EMPTY_INPUT;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.ERROR_IN_AMOUNT;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.ERROR_IN_DONT_DIVIDE;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.ERROR_IN_MEMBER;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.ERROR_IN_RATIO;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.ERROR_WRONG_EXPRESSION;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.ITEMnITEM;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.LEFTnRIGHT;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.MEMBER2MEMBER;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.MEMBERnMEMBER;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.MEMBERnRATIO;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.MINUS;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.PLUS;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.TITLEnMONEY;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.VALID_CHARACTERS_ALL;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.VALID_CHARACTERS_AMOUNT;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.VALID_CHARACTERS_MEMBER;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.VALID_CHARACTERS_RATIO;
+
 /**
  * Created by fontjuna on 2017-08-15.
  * <p>
@@ -18,7 +38,7 @@ import java.util.regex.Pattern;
  * '~' 숫자와 숫자사이에 써서 이름대신 순번으로 대치 1~10 (1부터 10까지 10명)
  */
 
-public class Calculator implements CommonDutchPay {
+public class Calculator {
 
     private static final String TAG = Calculator.class.getSimpleName();
 

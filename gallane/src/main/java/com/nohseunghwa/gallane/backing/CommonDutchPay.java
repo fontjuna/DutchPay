@@ -4,7 +4,7 @@ package com.nohseunghwa.gallane.backing;
  * Created by fontjuna on 2017-08-20.
  */
 
-public interface CommonDutchPay {
+public class CommonDutchPay {
 
     /**
      * Created by fontjuna on 2017-08-15.
@@ -142,12 +142,12 @@ public interface CommonDutchPay {
             + "\n\n▣ 더 복잡한 경우도 위의 예를 응용해 보세요";
 
     public static final String HINT_EXPRESSION = "금액" + LEFTnRIGHT + "이름" + MEMBERnRATIO + "배율" + MEMBERnMEMBER + "...";
-    public static final String INPUT_EXPRESSION = "input_expression";
+    public static final String INPUT_EXPRESSION = "input";
     public static final String NO_BANKING = "\n\n(이 내용은 메세지에서 제외 됩니다."
             + "\n계좌 정보를 같이 보내시려면"
             + "\n예금주, 은행명, 계좌번호가 있어야 합니다.)";
 
-    public static final String TAB_TITLE_1 = "어리신 용";
+    public static final String TAB_TITLE_1 = "가를 내용";
     public static final String TAB_TITLE_2 = "어르신 용";
     public static final String TAB_TITLE_3 = "결과 공유";
 
