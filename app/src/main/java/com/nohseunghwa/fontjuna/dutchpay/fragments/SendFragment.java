@@ -24,9 +24,8 @@ import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.NO_BANKIN
 public class SendFragment extends Fragment {
 
     public static final String TAG = SendFragment.class.getSimpleName();
-    TextView mMsgText;
-    String mMessage;
-    String mBanking;
+    private TextView mMsgText;
+    private String mMessage;
 
     public SendFragment() {
         // Required empty public constructor

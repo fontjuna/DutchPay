@@ -41,8 +41,13 @@ public class DutchPayActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 if (position == 1) {
+                    PapaFragment fragment = (PapaFragment) adapter.getItem(position);
+                    fragment.restoreResult();
+                } else if (position == 2) {
                     SendFragment fragment = (SendFragment) adapter.getItem(position);
                     fragment.restoreResult();
+                }
+                if (position != 0) {
                 }
             }
 
@@ -84,7 +89,7 @@ public class DutchPayActivity extends AppCompatActivity {
                 case 2:
                     return mSendFragment;
             }
-            return new KidsFragment();
+            return mKidsFragment;
         }
 
         @Override

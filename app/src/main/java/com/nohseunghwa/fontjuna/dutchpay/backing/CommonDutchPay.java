@@ -147,7 +147,7 @@ public class CommonDutchPay {
             + "\n계좌 정보를 같이 보내시려면"
             + "\n예금주, 은행명, 계좌번호가 있어야 합니다.)";
 
-    public static final String TAB_TITLE_1 = "가를것들";
+    public static final String TAB_TITLE_1 = "갈라낼것";
     public static final String TAB_TITLE_2 = "쉬운가름";
     public static final String TAB_TITLE_3 = "가름전달";
 

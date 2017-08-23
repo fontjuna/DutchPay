@@ -93,6 +93,12 @@ public class KidsFragment extends Fragment implements  View.OnClickListener {
         editor.apply();
     }
 
+    public void restoreResult() {
+        SharedPreferences message = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//        mMessage = message.getString(INPUT_EXPRESSION, "");
+//        mMsgText.setText(mMessage);
+    }
+
     private void getInputExpression() {
         SharedPreferences message = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mInputExpression = message.getString(INPUT_EXPRESSION, "");

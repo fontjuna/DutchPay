@@ -52,8 +52,8 @@ public class Spliter {
                     value = mMember.get(key);
                 }
                 mMember.put(key, value + td.getElements().getRatio(key) * unitPrice);
-                mAmount += amount;
             }
+            mAmount += amount;
         }
     }
 
