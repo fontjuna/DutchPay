@@ -2,11 +2,18 @@ package com.nohseunghwa.fontjuna.dutchpay.backing;
 
 import java.util.regex.Pattern;
 
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.DOT;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.ERROR_DELIMITER;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.ERROR_EMPTY_INPUT;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.ERROR_WRONG_EXPRESSION;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.MEMBERnRATIO;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.TEXT;
+
 /**
  * Created by fontjuna on 2017-08-20.
  */
 
-public class Member implements CommonDutchPay {
+public class Member {
     private boolean mError = true;
     private String mErrorMessage = "";
     private String mName = "";

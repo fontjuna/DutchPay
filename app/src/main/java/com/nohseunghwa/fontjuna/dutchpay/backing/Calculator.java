@@ -7,6 +7,26 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.COMMA;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.ERROR_EMPTY_INPUT;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.ERROR_IN_AMOUNT;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.ERROR_IN_DONT_DIVIDE;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.ERROR_IN_MEMBER;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.ERROR_IN_RATIO;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.ERROR_WRONG_EXPRESSION;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.ITEMnITEM;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.LEFTnRIGHT;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.MEMBER2MEMBER;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.MEMBERnMEMBER;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.MEMBERnRATIO;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.MINUS;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.PLUS;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.TITLEnMONEY;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.VALID_CHARACTERS_ALL;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.VALID_CHARACTERS_AMOUNT;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.VALID_CHARACTERS_MEMBER;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.VALID_CHARACTERS_RATIO;
+
 /**
  * Created by fontjuna on 2017-08-15.
  * <p>
@@ -18,7 +38,7 @@ import java.util.regex.Pattern;
  * '~' 숫자와 숫자사이에 써서 이름대신 순번으로 대치 1~10 (1부터 10까지 10명)
  */
 
-public class Calculator implements CommonDutchPay {
+public class Calculator {
 
     private static final String TAG = Calculator.class.getSimpleName();
 
@@ -28,7 +48,7 @@ public class Calculator implements CommonDutchPay {
     private double mAmount = 0.0;
     private int mGather = 0;
     private int mRemain = 0;
-    private String mTextResult = "";
+    private String mResultText = "";
     private boolean mError = false;
     private DecimalFormat df = new DecimalFormat("#,##0");
 
@@ -41,8 +61,8 @@ public class Calculator implements CommonDutchPay {
         makeResultOutText();
     }
 
-    public String getTextResult() {
-        return mTextResult;
+    public String getResultText() {
+        return mResultText;
     }
 
     public Map<String, Integer> getListResult() {
@@ -102,14 +122,14 @@ public class Calculator implements CommonDutchPay {
         // common check
         if (item.isEmpty()) {
             mError = true;
-            mTextResult = ERROR_EMPTY_INPUT;
+            mResultText = ERROR_EMPTY_INPUT;
         } else if (leftNright.length < 2) {
             mError = true;
-            mTextResult = ERROR_IN_DONT_DIVIDE;
+            mResultText = ERROR_IN_DONT_DIVIDE;
             // left check
         } else if (!Pattern.matches(VALID_CHARACTERS_AMOUNT, leftNright[0])) {
             mError = true;
-            mTextResult = ERROR_IN_AMOUNT;
+            mResultText = ERROR_IN_AMOUNT;
             // right check
         } else {
             checkRightOfItem(leftNright[1]);
@@ -120,7 +140,7 @@ public class Calculator implements CommonDutchPay {
     private void checkRightOfItem(String right) {
         if (!Pattern.matches(VALID_CHARACTERS_MEMBER, right)) {
             mError = true;
-            mTextResult = ERROR_IN_MEMBER;
+            mResultText = ERROR_IN_MEMBER;
         } else {
             String[] members = right.split(MEMBERnMEMBER);
             for (String member : members) {
@@ -128,11 +148,11 @@ public class Calculator implements CommonDutchPay {
                 if (memberNrate.length > 1) {
                     if (memberNrate.length > 2 || memberNrate[0].isEmpty() || memberNrate[1].isEmpty()) {
                         mError = true;
-                        mTextResult = ERROR_IN_MEMBER;
+                        mResultText = ERROR_IN_MEMBER;
                         break;
                     } else if (!Pattern.matches(VALID_CHARACTERS_RATIO, memberNrate[1])) {
                         mError = true;
-                        mTextResult = ERROR_IN_RATIO;
+                        mResultText = ERROR_IN_RATIO;
                         break;
                     }
                 }
@@ -187,9 +207,9 @@ public class Calculator implements CommonDutchPay {
             int money = 0;
             int digits = getDigits();
 
-            mTextResult = "";
-            mTextResult += "총_금_액 = " + padNum(mAmount, digits);
-            mTextResult += "\n계산단위 : " + padNum(mUnit, digits);
+            mResultText = "";
+            mResultText += "총_금_액 = " + padNum(mAmount, digits);
+            mResultText += "\n계산단위 : " + padNum(mUnit, digits);
 
             String temp = "";
 
@@ -203,15 +223,15 @@ public class Calculator implements CommonDutchPay {
                 mListResult.put(key, money);
             }
             mRemain = mGather - (int) mAmount;
-            mTextResult += "\n걷는금액 : " + padNum(mGather, digits);
-            mTextResult += "\n남는금액 : " + padNum(mRemain, digits);
-            mTextResult += "\n" + temp;
+            mResultText += "\n걷는금액 : " + padNum(mGather, digits);
+            mResultText += "\n남는금액 : " + padNum(mRemain, digits);
+            mResultText += "\n" + temp;
         }
     }
 
     private String checkAndRemoveIllegal(String text) {
         if (text.isEmpty()) {
-            mTextResult = ERROR_EMPTY_INPUT;
+            mResultText = ERROR_EMPTY_INPUT;
             mError = true;
             text = "";
         } else {
@@ -221,7 +241,7 @@ public class Calculator implements CommonDutchPay {
             text = text.replace(MINUS + PLUS, MINUS);
             text = text.replace(PLUS + MINUS, MINUS);
             if (!Pattern.matches(VALID_CHARACTERS_ALL, text)) {
-                mTextResult = ERROR_WRONG_EXPRESSION;
+                mResultText = ERROR_WRONG_EXPRESSION;
                 mError = true;
             }
         }

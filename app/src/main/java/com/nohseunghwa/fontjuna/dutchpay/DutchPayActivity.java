@@ -6,16 +6,20 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay;
 import com.nohseunghwa.fontjuna.dutchpay.fragments.KidsFragment;
 import com.nohseunghwa.fontjuna.dutchpay.fragments.PapaFragment;
 import com.nohseunghwa.fontjuna.dutchpay.fragments.SendFragment;
 
-public class DutchPayActivity extends AppCompatActivity implements CommonDutchPay{
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.INPUT_EXPRESSION;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.TAB_TITLE_1;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.TAB_TITLE_2;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.TAB_TITLE_3;
+
+public class DutchPayActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +29,27 @@ public class DutchPayActivity extends AppCompatActivity implements CommonDutchPa
         clearSharedPreference();
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab);
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
+        final MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
+
         tabLayout.setupWithViewPager(viewPager);
+//        viewPager.setOffscreenPageLimit(0);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 1) {
+                    SendFragment fragment = (SendFragment) adapter.getItem(position);
+                    fragment.restoreResult();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
         viewPager.setAdapter(adapter);
     }
 
@@ -37,23 +60,29 @@ public class DutchPayActivity extends AppCompatActivity implements CommonDutchPa
         editor.apply();
     }
 
-    private static class MyPagerAdapter extends FragmentPagerAdapter {
+    private static class MyPagerAdapter extends FragmentStatePagerAdapter {
 
         public static final int PAGE_NUM = 3;
+        private SendFragment mSendFragment;
+        private KidsFragment mKidsFragment;
+        private PapaFragment mPapaFragment;
 
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
+            mSendFragment = new SendFragment();
+            mKidsFragment = new KidsFragment();
+            mPapaFragment = new PapaFragment();
         }
 
         @Override
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new KidsFragment();
+                    return mKidsFragment;
                 case 1:
-                    return new PapaFragment();
+                    return mPapaFragment;
                 case 2:
-                    return new SendFragment();
+                    return mSendFragment;
             }
             return new KidsFragment();
         }
@@ -79,10 +108,5 @@ public class DutchPayActivity extends AppCompatActivity implements CommonDutchPa
             return super.getPageTitle(position);
         }
     }
-
-//    private void testDialog() {
-//        Confirm confirm = new Confirm("테스ㅡ트", "알아보세요!", "ok", "no");
-//
-//    }
 
 }

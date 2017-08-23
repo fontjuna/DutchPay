@@ -3,6 +3,8 @@ package com.nohseunghwa.fontjuna.dutchpay;
 import com.nohseunghwa.fontjuna.dutchpay.backing.Parsing;
 import com.nohseunghwa.fontjuna.dutchpay.classes_pack.Amount;
 import com.nohseunghwa.fontjuna.dutchpay.classes_pack.Elements;
+import com.nohseunghwa.fontjuna.dutchpay.classes_pack.TitleData;
+import com.nohseunghwa.fontjuna.dutchpay.classes_pack.Titles;
 
 /**
  * Created by fontjuna on 2017-08-15.
@@ -14,10 +16,15 @@ public class TestMain {
     static final int TEST_ELEMENT = 2;
     static final int TEST_PARSING = 3;
     static final int TEST_AMOUNT = 4;
+    static final int TEST_TITLES = 5;
+
+    private static String s0 = "test:500-+200.,+-300@1~10!2,22!0.2,a,b,x!2/60000@a,x,y!1.5";
+    private static String s1 = "test:53000@22!0.2,a";
+    private static String s2 = "test:53000@1~1!0.2";
 
     public static void main(String[] args) {
 
-        int whatDoYouWant = 4;
+        int whatDoYouWant = 5;
         switch (whatDoYouWant) {
             case TEST_ELEMENTS: {
                 testElements();
@@ -35,41 +42,53 @@ public class TestMain {
                 testAmount();
                 break;
             }
+            case TEST_TITLES: {
+                testTitles();
+                break;
+            }
         }
     }
 
+    private static void testTitles() {
+        Titles obj = new Titles(s0);
+
+        System.out.println("input : " + obj.getSource());
+        System.out.println("Error ? " + obj.isError());
+        System.out.println("Text ? " + obj.getText());
+        System.out.println("Message : " + obj.getMessage());
+
+        for (TitleData t : obj.getTitleDatas()) {
+            System.out.println(t.getText());
+        }
+
+    }
+
     private static void testAmount() {
+        Amount obj = new Amount(s0);
 
-        String so = "test:500-+200.,+-300@1~10!2,22!0.2,a,b,x!2/60000@a,x,y!1.5";
-        String s1 = "test:53000@22!0.2,a";
-        String s = "test:53000@1~1!0.2";
-
-        Amount am = new Amount(so);
-
-        System.out.println("input : " + am.getSource());
-        System.out.println("Error ? " + am.isError());
-        System.out.println("Message : " + am.getMessage());
-        System.out.println("count : " + am.getCount());
-        System.out.println("Total : " + am.getTotal());
-        if (!am.isError()) {
+        System.out.println("input : " + obj.getSource());
+        System.out.println("Error ? " + obj.isError());
+        System.out.println("Text ? " + obj.getText());
+        System.out.println("Message : " + obj.getMessage());
+        System.out.println("count : " + obj.getCount());
+        System.out.println("Total : " + obj.getTotal());
+        if (!obj.isError()) {
             int key = 1;
-            for (Double d : am.getAmount()) {
+            for (Double d : obj.getAmount()) {
                 System.out.println(key++ + " : " + d);
             }
         }
     }
 
     private static void testParsing() {
-        String msg = "test:53000@a,b,x!2/60000@a,x,y!1.5";
+        Parsing obj = new Parsing(s0, 10);
 
-        Parsing parsing = new Parsing(msg, 10);
-
-        System.out.println("Error ? " + parsing.isError());
-        System.out.println("Unit : " + parsing.getUnit());
-        System.out.println("\nAmount : " + parsing.getAmount());
-        System.out.println("Gather : " + parsing.getGather());
-        System.out.println("Remain : " + parsing.getRemain());
-        System.out.println("\nResult : " + parsing.getText());
+        System.out.println("Error ? " + obj.isError());
+        System.out.println("Unit : " + obj.getUnit());
+        System.out.println("\nAmount : " + obj.getAmount());
+        System.out.println("Gather : " + obj.getGather());
+        System.out.println("Remain : " + obj.getRemain());
+        System.out.println("\nResult : " + obj.getText());
     }
 
     private static void testElement() {
@@ -77,20 +96,17 @@ public class TestMain {
     }
 
     private static void testElements() {
-        String so = "1/test:53000@1~10!2,22!0.2,a,b,x!2/60000@a,x,y!1.5";
-        String s1 = "test:53000@22!0.2,a";
-        String s = "test:53000@1~1!0.2";
+        Elements obj = new Elements(s0);
 
-        Elements el = new Elements(so);
-
-        System.out.println("input : " + el.getSource());
-        System.out.println("Error ? " + el.isError());
-        System.out.println("Message : " + el.getMessage());
-        System.out.println("count : " + el.getCount());
-        System.out.println("SumRatio : " + el.getSumRatio());
-        if (!el.isError()) {
-            for (String key : el.getDescending().keySet()) {
-                System.out.println(key + " : " + el.getRatio(key));
+        System.out.println("input : " + obj.getSource());
+        System.out.println("Text ? " + obj.getText());
+        System.out.println("Error ? " + obj.isError());
+        System.out.println("Message : " + obj.getMessage());
+        System.out.println("count : " + obj.getCount());
+        System.out.println("SumRatio : " + obj.getSumRatio());
+        if (!obj.isError()) {
+            for (String key : obj.getDescending().keySet()) {
+                System.out.println(key + " : " + obj.getRatio(key));
             }
         }
     }

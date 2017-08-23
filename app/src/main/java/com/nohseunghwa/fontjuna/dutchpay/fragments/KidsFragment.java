@@ -1,6 +1,5 @@
 package com.nohseunghwa.fontjuna.dutchpay.fragments;
 
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -13,13 +12,16 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nohseunghwa.fontjuna.dutchpay.R;
-import com.nohseunghwa.fontjuna.dutchpay.backing.Calculator;
-import com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay;
+import com.nohseunghwa.fontjuna.dutchpay.classes_pack.Spliter;
 
-public class KidsFragment extends Fragment implements CommonDutchPay, View.OnClickListener {
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.HINT_EXPRESSION;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.HINT_INFORMATION;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.INPUT_EXPRESSION;
+
+
+public class KidsFragment extends Fragment implements  View.OnClickListener {
 
     private TextView mResultTextView;
     private EditText mInputEditText;
@@ -57,48 +59,22 @@ public class KidsFragment extends Fragment implements CommonDutchPay, View.OnCli
 
     @Override
     public void onClick(View v) {
-//        Confirm confirm = new Confirm("계산하기", "입력한대로 금액을 나눕니다.", "취소", "실행");
-//        confirm.getMiaADF().show(getActivity().getSupportFragmentManager(),"confirm");
-//        if (confirm.getChoice() == 0) {
         switch (v.getId()) {
             case R.id.calc_button:
                 calcEditText();
                 break;
             case R.id.init_button:
-                confirm("초기화 하기",
-                        "다른 내용을 입력 하시려면\n계산 결과를 지우고 입력을 초기화 합니다.",
-                        "취소", "실행");
-//                initEditText();
+                initEditText();
                 break;
         }
         setInputExpression();
     }
 
-    private void confirm(String title, String message, final String negative, final String positive) {
-        MiaADF miaADF = MiaADF.newInstance(title, message, negative, positive,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        switch (i) {
-                            case DialogInterface.BUTTON_NEGATIVE:
-                                Toast.makeText(getContext(), negative, Toast.LENGTH_SHORT).show();
-                                break;
-                            case DialogInterface.BUTTON_POSITIVE:
-                                initEditText();
-                                Toast.makeText(getContext(), positive, Toast.LENGTH_SHORT).show();
-                                break;
-                        }
-                    }
-                });
-        miaADF.show(getActivity().getSupportFragmentManager(), "choice");
-    }
-
     private void calcEditText() {
         mInputEditText = (EditText) getView().findViewById(R.id.input_edit_text);
-//        Parsing cal = new Parsing(mInputEditText.getText().toString(), getUnit());
-//        mInputExpression = cal.getText();
-        Calculator cal = new Calculator(mInputEditText.getText().toString(), getUnit());
-        mInputExpression = cal.getTextResult();
+//        Calculator obj = new Calculator(mInputEditText.getText().toString(), getUnit());
+        Spliter obj = new Spliter(mInputEditText.getText().toString(), getUnit());
+        mInputExpression = obj.getResultText();
         mResultTextView.setText(mInputExpression);
     }
 

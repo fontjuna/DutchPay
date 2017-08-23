@@ -25,6 +25,7 @@ import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.VALID_CHA
 
 public class Elements {
     private String mSource;
+    private String mText;
     private HashMap<String, Double> mElements;
     private boolean mError;
     private String mMessage;
@@ -37,6 +38,7 @@ public class Elements {
         if (!isError()) {
             mElements = new HashMap<>();
             mMessage = "";
+            mText = "";
             mSumRatio = 0.0;
             parsing();
         }
@@ -151,6 +153,8 @@ public class Elements {
                             value = mElements.get(key);
                         }
                         mElements.put(key, value + element.getRatio());
+                        mText += (mText.isEmpty() ? "" : ",") + key +
+                                (element.getRatio() == 1.0 ? "" : "!" + element.getRatio());
                     }
                 }
             } else {
@@ -193,6 +197,8 @@ public class Elements {
                             value = mElements.get(key);
                         }
                         mElements.put(key, value + ratio);
+                        mText += (mText.isEmpty() ? "" : ",") + key +
+                                (ratio == 1.0 ? "" : "!" + ratio);
                     }
                 }
             }
@@ -200,5 +206,9 @@ public class Elements {
             mError = true;
             mMessage = element.getMessage();
         }
+    }
+
+    public String getText() {
+        return mText;
     }
 }

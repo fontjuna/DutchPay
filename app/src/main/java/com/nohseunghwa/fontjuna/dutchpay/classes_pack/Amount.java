@@ -22,6 +22,7 @@ import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.VALID_CHA
 public class Amount {
     private String mSource;
     private ArrayList<Double> mAmount;
+    private String mText;
     private boolean mError;
     private String mMessage;
     private double mTotal;
@@ -33,6 +34,7 @@ public class Amount {
         if (!isError()) {
             mAmount = new ArrayList<>();
             mMessage = "";
+            mText = "";
             mTotal = 0.0;
             parsing();
         }
@@ -100,6 +102,7 @@ public class Amount {
                 parseMinus(i);
             } else {
                 mAmount.add(Double.parseDouble(i));
+                mText += (mText.isEmpty() ? "" : "+") + i;
             }
         }
 
@@ -111,6 +114,7 @@ public class Amount {
         String[] minus = ("0" + s).split(COMMA);
         for (int j = 0; j < minus.length; j++) {
             mAmount.add(Double.parseDouble(minus[j]));
+            mText += (mText.isEmpty() ? "" : "+") + minus[j];
         }
     }
 
@@ -136,5 +140,9 @@ public class Amount {
 
     public ArrayList<Double> getAmount() {
         return mAmount;
+    }
+
+    public String getText() {
+        return mText;
     }
 }

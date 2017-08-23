@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.ERROR_EMPTY_INPUT;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.ERROR_WRONG_EXPRESSION;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.ITEMnITEM;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.MINUS;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.PLUS;
+import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.VALID_CHARACTERS_ALL;
+
 /**
  * Created by fontjuna on 2017-08-15.
  * <p>
@@ -16,7 +23,7 @@ import java.util.regex.Pattern;
  * '~' 숫자와 숫자사이에 써서 이름대신 순번으로 대치 1~10 (1부터 10까지 10명)
  */
 
-public class Parsing implements CommonDutchPay {
+public class Parsing {
 
     private static final String TAG = Parsing.class.getSimpleName();
 

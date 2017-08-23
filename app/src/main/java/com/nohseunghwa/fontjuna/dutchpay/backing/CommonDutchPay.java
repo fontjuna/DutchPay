@@ -4,7 +4,7 @@ package com.nohseunghwa.fontjuna.dutchpay.backing;
  * Created by fontjuna on 2017-08-20.
  */
 
-public interface CommonDutchPay {
+public class CommonDutchPay {
 
     /**
      * Created by fontjuna on 2017-08-15.
@@ -101,55 +101,59 @@ public interface CommonDutchPay {
      */
 
     public static final String HINT_INFORMATION
-            = "구분자로   " + LEFTnRIGHT + "   " + MEMBERnMEMBER + "   " + MEMBERnRATIO + "   " + ITEMnITEM + "  4개 문자를 사용합니다"
+        = "구분자로   " + LEFTnRIGHT + "   " + MEMBERnMEMBER + "   " + MEMBERnRATIO + "   " + ITEMnITEM + "  4개 문자를 사용합니다"
 
-            + "\n\n▣ 똑 같이 나눌 때( '" + LEFTnRIGHT + "' 로 금액과 사람 구분)"
-            + "\n  입력 12000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnMEMBER + "C (결과 A,B,C=4,000원)"
+        + "\n\n▣ 똑 같이 나눌 때( '" + LEFTnRIGHT + "' 로 금액과 사람 구분)"
+        + "\n  입력 12000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnMEMBER + "C (결과 A,B,C=4,000원)"
 
-            + "\n\n▣ 꼴찌한 횟수 만큼 낼때( '" + MEMBERnRATIO + "' 뒤에 횟수(배율))"
-            + "\n  입력 12000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnRATIO + "2" + MEMBERnMEMBER + "C" + MEMBERnRATIO + "3 (" + MEMBERnRATIO + "1 은 없어도 같음)"
-            + "\n   (결과 A=2,000/B=4,000/C=6,000원)"
+        + "\n\n▣ 꼴찌한 횟수 만큼 낼때( '" + MEMBERnRATIO + "' 뒤에 횟수(배율))"
+        + "\n  입력 12000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnRATIO + "2" + MEMBERnMEMBER + "C" + MEMBERnRATIO + "3 (" + MEMBERnRATIO + "1 은 없어도 같음)"
+        + "\n   (결과 A=2,000/B=4,000/C=6,000원)"
 
-            + "\n\n▣ 나눌 금액이 두가지 이상일 때( '" + ITEMnITEM + "' 로 구분)"
-            + "\n  입력 9000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnMEMBER + "C" + ITEMnITEM + "3000" + LEFTnRIGHT + "C" + MEMBERnMEMBER + "D"
-            + "\n    (결과 A,B=3,000/C=4,500/D=1,500원)"
+        + "\n\n▣ 나눌 금액이 두가지 이상일 때( '" + ITEMnITEM + "' 로 구분)"
+        + "\n  입력 9000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnMEMBER + "C" + ITEMnITEM + "3000" + LEFTnRIGHT + "C" + MEMBERnMEMBER + "D"
+        + "\n    (결과 A,B=3,000/C=4,500/D=1,500원)"
 
-            + "\n\n▣ C가 3,000원을 더내야 할 때"
-            + "\n  입력 12000-3000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnMEMBER + "C" + ITEMnITEM + "3000" + LEFTnRIGHT + "C"
-            + "\n  또는 9000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnMEMBER + "C" + ITEMnITEM + "3000" + LEFTnRIGHT + "C"
-            + "\n    (결과 A,B=3,000/C=6,000원)"
+        + "\n\n▣ C가 3,000원을 더내야 할 때"
+        + "\n  입력 12000-3000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnMEMBER + "C" + ITEMnITEM + "3000" + LEFTnRIGHT + "C"
+        + "\n  또는 9000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnMEMBER + "C" + ITEMnITEM + "3000" + LEFTnRIGHT + "C"
+        + "\n    (결과 A,B=3,000/C=6,000원)"
 
-            + "\n\n▣ C는 3,000원만 낼 때"
-            + "\n  입력 12000-3000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + ITEMnITEM + "3000" + LEFTnRIGHT + "C"
-            + "\n  또는 9000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + ITEMnITEM + "3000" + LEFTnRIGHT + "C"
-            + "\n    (결과 A,B=4,500/C=3,000원)"
+        + "\n\n▣ C는 3,000원만 낼 때"
+        + "\n  입력 12000-3000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + ITEMnITEM + "3000" + LEFTnRIGHT + "C"
+        + "\n  또는 9000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + ITEMnITEM + "3000" + LEFTnRIGHT + "C"
+        + "\n    (결과 A,B=4,500/C=3,000원)"
 
-            + "\n\n▣ B의 몫을 C가 낼 때"
-            + "\n  입력 12000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnRATIO + "0" + MEMBERnMEMBER + "C" + MEMBERnRATIO + "2"
-            + "\n  또는 12000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "C" + MEMBERnRATIO + "2 (B" + MEMBERnRATIO + "0 배율이 0은 생략)"
-            + "\n    (결과 A=4,000/C=8,000원)"
+        + "\n\n▣ B의 몫을 C가 낼 때"
+        + "\n  입력 12000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnRATIO + "0" + MEMBERnMEMBER + "C" + MEMBERnRATIO + "2"
+        + "\n  또는 12000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "C" + MEMBERnRATIO + "2 (B" + MEMBERnRATIO + "0 배율이 0은 생략)"
+        + "\n    (결과 A=4,000/C=8,000원)"
 
-            + "\n\n▣ B의 몫을 C,D가 낼 때"
-            + "\n  입력 12000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "C" + MEMBERnRATIO + "1.5" + MEMBERnMEMBER + "D" + MEMBERnRATIO + "1.5"
-            + "\n    (결과 A=3,000/B=0/C,D=4,500원)"
+        + "\n\n▣ B의 몫을 C,D가 낼 때"
+        + "\n  입력 12000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "C" + MEMBERnRATIO + "1.5" + MEMBERnMEMBER + "D" + MEMBERnRATIO + "1.5"
+        + "\n    (결과 A=3,000/B=0/C,D=4,500원)"
 
-            + "\n\n▣ 찬조금액(=3,000원) 만큼 감해 줄 때"
-            + "\n  입력 12000-3000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnMEMBER + "C"
-            + "\n  또는 12000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnMEMBER + "C" + ITEMnITEM + "-3000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnMEMBER + "C"
-            + "\n  또는 9000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnMEMBER + "C"
-            + "\n  (결과 각 3,000원)"
+        + "\n\n▣ 찬조금액(=3,000원) 만큼 감해 줄 때"
+        + "\n  입력 12000-3000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnMEMBER + "C"
+        + "\n  또는 12000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnMEMBER + "C" + ITEMnITEM + "-3000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnMEMBER + "C"
+        + "\n  또는 9000" + LEFTnRIGHT + "A" + MEMBERnMEMBER + "B" + MEMBERnMEMBER + "C"
+        + "\n  (결과 각 3,000원)"
 
-            + "\n\n▣ 더 복잡한 경우도 위의 예를 응용해 보세요";
+        + "\n\n▣ 더 복잡한 경우도 위의 예를 응용해 보세요";
 
     public static final String HINT_EXPRESSION = "금액" + LEFTnRIGHT + "이름" + MEMBERnRATIO + "배율" + MEMBERnMEMBER + "...";
-    public static final String INPUT_EXPRESSION = "input_expression";
+    public static final String INPUT_EXPRESSION = "input";
     public static final String NO_BANKING = "\n\n(이 내용은 메세지에서 제외 됩니다."
             + "\n계좌 정보를 같이 보내시려면"
             + "\n예금주, 은행명, 계좌번호가 있어야 합니다.)";
 
-    public static final String TAB_TITLE_1 = "어리신 용";
-    public static final String TAB_TITLE_2 = "어르신 용";
-    public static final String TAB_TITLE_3 = "결과 공유";
+    public static final String TAB_TITLE_1 = "가를것들";
+    public static final String TAB_TITLE_2 = "쉬운가름";
+    public static final String TAB_TITLE_3 = "가름전달";
+
+    public static final int TAB_SELECT_KIDS = 0;
+    public static final int TAB_SELECT_PAPA = 1;
+    public static final int TAB_SELECT_SEND = 2;
 
 //    public boolean isError();
 //    public String  getError();

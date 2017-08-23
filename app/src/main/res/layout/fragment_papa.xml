@@ -3,15 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBakckground"
     android:orientation="vertical"
-    tools:context="com.nohseunghwa.fontjuna.dutchpay.fragments.PapaFragment">
+    tools:context="com.nohseunghwa.gallane.fragments.PapaFragment">
 
     <include layout="@layout/assistance_line_accent"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#d6d7d7"
+        android:background="@color/colorButtonFace"
         android:padding="4dp"
         android:text="계산 단위"/>
 
@@ -23,7 +24,7 @@
         android:id="@+id/input_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#d6d7d7"
+        android:background="@color/colorButtonFace"
         android:padding="4dp"
         android:text="입력 내용"/>
 
@@ -61,12 +62,16 @@
             android:id="@+id/init_button"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:background="@color/colorButtonFace"
+            android:layout_margin="4dp"
             android:text="초기화"/>
 
         <Button
             android:id="@+id/calc_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorButtonFace"
+            android:layout_margin="4dp"
             android:text="계산"/>
     </LinearLayout>
 </LinearLayout>
