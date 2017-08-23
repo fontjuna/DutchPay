@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#bcaaa4</color>
+    <color name="colorPrimary">#79919d</color>
+    <color name="colorPrimaryDark">#607d8b</color>
+    <color name="colorAccent">#b0bec5</color>
     <color name="colorAccentGrey">#b7b7b7</color>
     <color name="colorAccentBeige">#fff9c4</color>
     <color name="colorAccentOrigin">#FF4081</color>
+
     <color name="colorTabFocused">#d6d7d7</color>
     <color name="colorTabForgot">#fafafa</color>
+
     <color name="colorBakckground">#e7e9f7</color>
+    <color name="colorButtonFace">#cfd8dc</color>
 </resources>

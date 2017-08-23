@@ -22,7 +22,7 @@ public class GallaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dutch_pay);
+        setContentView(R.layout.activity_galla);
 
         clearSharedPreference();
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab);
@@ -34,7 +34,6 @@ public class GallaActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -47,7 +46,6 @@ public class GallaActivity extends AppCompatActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
         viewPager.setAdapter(adapter);
@@ -62,22 +60,26 @@ public class GallaActivity extends AppCompatActivity {
 
     private static class MyPagerAdapter extends FragmentStatePagerAdapter {
 
-        public static final int PAGE_NUM =2;
+        public static final int PAGE_NUM = 2;
         private SendFragment mSendFragment;
+        private KidsFragment mKidsFragment;
+//        private PapaFragment mPapaFragment;
 
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
             mSendFragment = new SendFragment();
+            mKidsFragment = new KidsFragment();
+//            mPapaFragment = new PapaFragment();
         }
 
         @Override
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new KidsFragment();
-//                case 1:
-//                    return new PapaFragment();
+                    return mKidsFragment;
                 case 1:
+//                    return mPapaFragment;
+//                case 2:
                     return mSendFragment;
             }
             return new KidsFragment();

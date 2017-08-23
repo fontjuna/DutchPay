@@ -1,7 +1,6 @@
 package com.nohseunghwa.gallane.fragments;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nohseunghwa.gallane.R;
 
@@ -40,18 +40,10 @@ public class SendFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_send, container, false);
     }
 
-
     public void restoreResult() {
         SharedPreferences message = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mMessage = message.getString(INPUT_EXPRESSION, "");
         mMsgText.setText(mMessage);
-    }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.d(TAG, "onAttach: ");
     }
 
     @Override
@@ -65,7 +57,11 @@ public class SendFragment extends Fragment {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendingSms();
+                if (mMessage.isEmpty()) {
+                    Toast.makeText(getActivity(), "보낼 내용이 없습니다.", Toast.LENGTH_SHORT).show();
+                } else {
+                    sendingSms();
+                }
             }
         });
 
