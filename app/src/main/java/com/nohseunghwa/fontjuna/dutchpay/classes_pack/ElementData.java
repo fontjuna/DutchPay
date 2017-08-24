@@ -17,14 +17,14 @@ import static com.nohseunghwa.fontjuna.dutchpay.backing.CommonDutchPay.MEMBERnRA
  * 결과를 지닌다
  */
 
-public class Element {
+public class ElementData {
     private String mSource;
     private boolean mError;
     private String mMessage;
     private String mName;
     private double mRatio;
 
-    public Element(String source) {
+    public ElementData(String source) {
 
         mError = source.isEmpty();
         mSource = source;

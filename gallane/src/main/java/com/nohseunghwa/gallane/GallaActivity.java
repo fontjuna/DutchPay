@@ -10,12 +10,16 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.nohseunghwa.gallane.fragments.CalcFragment;
 import com.nohseunghwa.gallane.fragments.KidsFragment;
+import com.nohseunghwa.gallane.fragments.PapaFragment;
 import com.nohseunghwa.gallane.fragments.SendFragment;
 
 import static com.nohseunghwa.gallane.backing.CommonDutchPay.INPUT_EXPRESSION;
 import static com.nohseunghwa.gallane.backing.CommonDutchPay.TAB_TITLE_1;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.TAB_TITLE_2;
 import static com.nohseunghwa.gallane.backing.CommonDutchPay.TAB_TITLE_3;
+import static com.nohseunghwa.gallane.backing.CommonDutchPay.TAB_TITLE_4;
 
 public class GallaActivity extends AppCompatActivity {
 
@@ -38,8 +42,17 @@ public class GallaActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 1) {
+                if (position == 0) {
+                    KidsFragment fragment = (KidsFragment) adapter.getItem(position);
+                    fragment.restoreResult();
+                } else if (position == 1) {
+                    PapaFragment fragment = (PapaFragment) adapter.getItem(position);
+                    fragment.restoreResult();
+                } else if (position == 2) {
                     SendFragment fragment = (SendFragment) adapter.getItem(position);
+                    fragment.restoreResult();
+                } else if (position == 3) {
+                    CalcFragment fragment = (CalcFragment) adapter.getItem(position);
                     fragment.restoreResult();
                 }
             }
@@ -60,16 +73,18 @@ public class GallaActivity extends AppCompatActivity {
 
     private static class MyPagerAdapter extends FragmentStatePagerAdapter {
 
-        public static final int PAGE_NUM = 2;
-        private SendFragment mSendFragment;
+        public static final int PAGE_NUM = 4;
         private KidsFragment mKidsFragment;
-//        private PapaFragment mPapaFragment;
+        private PapaFragment mPapaFragment;
+        private SendFragment mSendFragment;
+        private CalcFragment mCalcFragment;
 
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
-            mSendFragment = new SendFragment();
             mKidsFragment = new KidsFragment();
-//            mPapaFragment = new PapaFragment();
+            mPapaFragment = new PapaFragment();
+            mSendFragment = new SendFragment();
+            mCalcFragment = new CalcFragment();
         }
 
         @Override
@@ -78,11 +93,13 @@ public class GallaActivity extends AppCompatActivity {
                 case 0:
                     return mKidsFragment;
                 case 1:
-//                    return mPapaFragment;
-//                case 2:
+                    return mPapaFragment;
+                case 2:
                     return mSendFragment;
+                case 3:
+                    return mCalcFragment;
             }
-            return new KidsFragment();
+            return mKidsFragment;
         }
 
         @Override
@@ -97,10 +114,13 @@ public class GallaActivity extends AppCompatActivity {
                     return TAB_TITLE_1;
                 }
                 case 1: {
-//                    return TAB_TITLE_2;
-//                }
-//                case 2: {
+                    return TAB_TITLE_2;
+                }
+                case 2: {
                     return TAB_TITLE_3;
+                }
+                case 3: {
+                    return TAB_TITLE_4;
                 }
             }
             return super.getPageTitle(position);

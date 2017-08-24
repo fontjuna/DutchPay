@@ -23,24 +23,12 @@ public class TitleData {
         return mTitle;
     }
 
-    public void setTitle(String title) {
-        mTitle = title;
-    }
-
     public Amount getAmounts() {
         return mAmounts;
     }
 
-    public void setAmounts(Amount amounts) {
-        mAmounts = amounts;
-    }
-
     public Elements getElements() {
         return mElements;
-    }
-
-    public void setElements(Elements elements) {
-        mElements = elements;
     }
 
     public String getText() {

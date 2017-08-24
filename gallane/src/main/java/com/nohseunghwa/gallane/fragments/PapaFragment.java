@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 
 import com.nohseunghwa.gallane.R;
 
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.INPUT_EXPRESSION;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +33,7 @@ public class PapaFragment extends Fragment {
 
     public void restoreResult() {
         SharedPreferences message = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        mMessage = message.getString(INPUT_EXPRESSION, "");
+//        mMessage = message.getString(INPUT_EXPRESSION, "");
 //        mMsgText.setText(mMessage);
     }
 

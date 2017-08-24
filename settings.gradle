@@ -1,1 +1,1 @@
-include ':app', ':gallane'
+include ':app', ':gallane', ':calculator'

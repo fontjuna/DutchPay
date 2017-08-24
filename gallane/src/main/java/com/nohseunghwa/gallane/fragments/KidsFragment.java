@@ -14,7 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.nohseunghwa.gallane.R;
-import com.nohseunghwa.gallane.backing.Calculator;
+import com.nohseunghwa.gallane.backing.Galler;
 
 import static com.nohseunghwa.gallane.backing.CommonDutchPay.HINT_EXPRESSION;
 import static com.nohseunghwa.gallane.backing.CommonDutchPay.HINT_INFORMATION;
@@ -71,7 +71,7 @@ public class KidsFragment extends Fragment implements  View.OnClickListener {
 
     private void calcEditText() {
         mInputEditText = (EditText) getView().findViewById(R.id.input_edit_text);
-        Calculator cal = new Calculator(mInputEditText.getText().toString(), getUnit());
+        Galler cal = new Galler(mInputEditText.getText().toString(), getUnit());
         mInputExpression = cal.getTextResult();
         mResultTextView.setText(mInputExpression);
     }
@@ -82,6 +82,9 @@ public class KidsFragment extends Fragment implements  View.OnClickListener {
         mResultTextView.setText("");
         mInputEditText.setHint(HINT_EXPRESSION);
         mResultTextView.setHint(HINT_INFORMATION);
+    }
+
+    public void restoreResult(){
     }
 
     private void setInputExpression() {

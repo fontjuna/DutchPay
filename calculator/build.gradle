@@ -5,7 +5,7 @@ android {
     buildToolsVersion "26.0.1"
 
     defaultConfig {
-        applicationId "com.nohseunghwa.gallane"
+        applicationId "noh.seung.hwa.calculator"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
@@ -23,14 +23,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:26.0.0-alpha1'
-    compile 'com.google.firebase:firebase-core:10.0.1'
-    compile 'com.android.support:support-v4:26.+'
 }
-
-
-
-apply plugin: 'com.google.gms.google-services'

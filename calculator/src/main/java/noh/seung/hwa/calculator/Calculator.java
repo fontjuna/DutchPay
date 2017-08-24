@@ -1,6 +1,5 @@
-package com.nohseunghwa.gallane.backing;
+package noh.seung.hwa.calculator;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -8,6 +7,11 @@ import java.util.Stack;
 /**
  * Created by fontjuna on 2017-08-24.
  */
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 public class Calculator {
     //연산자가 아닌 기호

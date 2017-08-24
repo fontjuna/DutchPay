@@ -150,6 +150,7 @@ public class CommonDutchPay {
     public static final String TAB_TITLE_1 = "가를것들";
     public static final String TAB_TITLE_2 = "쉬운가름";
     public static final String TAB_TITLE_3 = "가름전달";
+    public static final String TAB_TITLE_4 = "계 산 기";
 
     public static final int TAB_SELECT_KIDS = 0;
     public static final int TAB_SELECT_PAPA = 1;

@@ -141,20 +141,20 @@ public class Elements {
                         break;
                     }
                 } else {
-                    Element element = new Element(member);
-                    if (element.isError()) {
+                    ElementData elementData = new ElementData(member);
+                    if (elementData.isError()) {
                         mError = true;
-                        mMessage = element.getMessage();
+                        mMessage = elementData.getMessage();
                         break;
                     } else {
                         value = 0.0;
-                        key = element.getName();
+                        key = elementData.getName();
                         if (mElementDatas.containsKey(key)) {
                             value = mElementDatas.get(key);
                         }
-                        mElementDatas.put(key, value + element.getRatio());
+                        mElementDatas.put(key, value + elementData.getRatio());
                         mText += (mText.isEmpty() ? "" : ",") + key +
-                                (element.getRatio() == 1.0 ? "" : "!" + element.getRatio());
+                                (elementData.getRatio() == 1.0 ? "" : "!" + elementData.getRatio());
                     }
                 }
             } else {
@@ -166,9 +166,9 @@ public class Elements {
     }
 
     private void makeMemberListFromTo(String member) {
-        Element element = new Element(member);
-        if (!element.isError()) {
-            String elementName = element.getName();
+        ElementData elementData = new ElementData(member);
+        if (!elementData.isError()) {
+            String elementName = elementData.getName();
             if (!Pattern.matches("^[" + DIGIT + MEMBER2MEMBER + "]*$", elementName) ||
                     elementName.length() < 3) {
                 mError = true;
@@ -176,7 +176,7 @@ public class Elements {
             } else {
                 double value;
                 String key;
-                double ratio = element.getRatio();
+                double ratio = elementData.getRatio();
 
                 String[] fromTo = elementName.split(MEMBER2MEMBER);
                 if (fromTo.length < 2) {
@@ -204,7 +204,7 @@ public class Elements {
             }
         } else {
             mError = true;
-            mMessage = element.getMessage();
+            mMessage = elementData.getMessage();
         }
     }
 
