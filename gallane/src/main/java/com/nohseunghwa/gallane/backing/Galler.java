@@ -7,25 +7,25 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.COMMA;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.ERROR_EMPTY_INPUT;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.ERROR_IN_AMOUNT;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.ERROR_IN_DONT_DIVIDE;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.ERROR_IN_MEMBER;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.ERROR_IN_RATIO;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.ERROR_WRONG_EXPRESSION;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.ITEMnITEM;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.LEFTnRIGHT;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.MEMBER2MEMBER;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.MEMBERnMEMBER;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.MEMBERnRATIO;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.MINUS;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.PLUS;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.TITLEnMONEY;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.VALID_CHARACTERS_ALL;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.VALID_CHARACTERS_AMOUNT;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.VALID_CHARACTERS_MEMBER;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.VALID_CHARACTERS_RATIO;
+import static com.nohseunghwa.gallane.backing.Constants.COMMA;
+import static com.nohseunghwa.gallane.backing.Constants.ERROR_EMPTY_INPUT;
+import static com.nohseunghwa.gallane.backing.Constants.ERROR_IN_AMOUNT;
+import static com.nohseunghwa.gallane.backing.Constants.ERROR_IN_DONT_DIVIDE;
+import static com.nohseunghwa.gallane.backing.Constants.ERROR_IN_MEMBER;
+import static com.nohseunghwa.gallane.backing.Constants.ERROR_IN_RATIO;
+import static com.nohseunghwa.gallane.backing.Constants.ERROR_WRONG_EXPRESSION;
+import static com.nohseunghwa.gallane.backing.Constants.ITEMnITEM;
+import static com.nohseunghwa.gallane.backing.Constants.LEFTnRIGHT;
+import static com.nohseunghwa.gallane.backing.Constants.MEMBER2MEMBER;
+import static com.nohseunghwa.gallane.backing.Constants.MEMBERnMEMBER;
+import static com.nohseunghwa.gallane.backing.Constants.MEMBERnRATIO;
+import static com.nohseunghwa.gallane.backing.Constants.MINUS;
+import static com.nohseunghwa.gallane.backing.Constants.PLUS;
+import static com.nohseunghwa.gallane.backing.Constants.TITLEnMONEY;
+import static com.nohseunghwa.gallane.backing.Constants.VALID_CHARACTERS_ALL;
+import static com.nohseunghwa.gallane.backing.Constants.VALID_CHARACTERS_AMOUNT;
+import static com.nohseunghwa.gallane.backing.Constants.VALID_CHARACTERS_MEMBER;
+import static com.nohseunghwa.gallane.backing.Constants.VALID_CHARACTERS_RATIO;
 
 /**
  * Created by fontjuna on 2017-08-15.

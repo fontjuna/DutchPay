@@ -4,7 +4,7 @@ package com.nohseunghwa.gallane.backing;
  * Created by fontjuna on 2017-08-20.
  */
 
-public class CommonDutchPay {
+public class Constants {
 
     /**
      * Created by fontjuna on 2017-08-15.
@@ -147,17 +147,31 @@ public class CommonDutchPay {
             + "\n계좌 정보를 같이 보내시려면"
             + "\n예금주, 은행명, 계좌번호가 있어야 합니다.)";
 
-    public static final String TAB_TITLE_1 = "가를것들";
-    public static final String TAB_TITLE_2 = "쉬운가름";
-    public static final String TAB_TITLE_3 = "가름전달";
-    public static final String TAB_TITLE_4 = "계 산 기";
+    public static final String TAB_TITLE_0 = "가를것들";
+    public static final String TAB_TITLE_1 = "쉬운가름";
+    public static final String TAB_TITLE_2 = "가름전달";
+    public static final String TAB_TITLE_3 = "계 산 기";
 
     public static final int TAB_SELECT_KIDS = 0;
     public static final int TAB_SELECT_PAPA = 1;
     public static final int TAB_SELECT_SEND = 2;
 
-//    public boolean isError();
-//    public String  getError();
 
+    //연산자가 아닌 기호
+    public static final String[] OPERATION0 = {"(", ")", ","};
+    //수 한 개가 필요한 연산기호(수는 왼쪽에 배치)
+    public static final String[] OPERATION1 = {"!"};
+    //수 두 개가 필요한 연산기호(수는 양옆에 배치) - 왼쪽에서 오른쪽으로 계산한다.
+    //예) 1 + 2 = 3, 6 / 3 = 2, 2 ^ 3 = 8..
+    public static final String[] OPERATION2 = {"+", "-", "*", "/", "^", "%"};
+    //수가 필요없는 문자 연산기호
+    public static final String[] WORD_OPERATION1 = {"pi", "e"};
+    //수 한 개가 필요한 문자 연산기호(괄호로 구분한다.)
+    public static final String[] WORD_OPERATION2 = {"sin", "sinh", "asin", "cos", "cosh", "acos", "tan", "tanh", "atan",
+            "sqrt", "exp", "abs", "log", "ceil", "floor", "round"};
+    //수 두 개가 필요한 문자 연산기호(괄호, 콤마로 구분한다.)
+    public static final String[] WORD_OPERATION3 = {"pow"};
+    //나누기할 때 반올림 자릿수
+    public static int HARF_ROUND_UP = 6;
 
 }

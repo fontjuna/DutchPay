@@ -15,11 +15,11 @@ import com.nohseunghwa.gallane.fragments.KidsFragment;
 import com.nohseunghwa.gallane.fragments.PapaFragment;
 import com.nohseunghwa.gallane.fragments.SendFragment;
 
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.INPUT_EXPRESSION;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.TAB_TITLE_1;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.TAB_TITLE_2;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.TAB_TITLE_3;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.TAB_TITLE_4;
+import static com.nohseunghwa.gallane.backing.Constants.INPUT_EXPRESSION;
+import static com.nohseunghwa.gallane.backing.Constants.TAB_TITLE_0;
+import static com.nohseunghwa.gallane.backing.Constants.TAB_TITLE_1;
+import static com.nohseunghwa.gallane.backing.Constants.TAB_TITLE_2;
+import static com.nohseunghwa.gallane.backing.Constants.TAB_TITLE_3;
 
 public class GallaActivity extends AppCompatActivity {
 
@@ -111,16 +111,16 @@ public class GallaActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0: {
-                    return TAB_TITLE_1;
+                    return TAB_TITLE_0;
                 }
                 case 1: {
-                    return TAB_TITLE_2;
+                    return TAB_TITLE_1;
                 }
                 case 2: {
-                    return TAB_TITLE_3;
+                    return TAB_TITLE_2;
                 }
                 case 3: {
-                    return TAB_TITLE_4;
+                    return TAB_TITLE_3;
                 }
             }
             return super.getPageTitle(position);

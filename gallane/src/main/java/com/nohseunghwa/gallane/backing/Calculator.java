@@ -5,28 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import static com.nohseunghwa.gallane.backing.Constants.HARF_ROUND_UP;
+import static com.nohseunghwa.gallane.backing.Constants.OPERATION0;
+import static com.nohseunghwa.gallane.backing.Constants.OPERATION1;
+import static com.nohseunghwa.gallane.backing.Constants.OPERATION2;
+import static com.nohseunghwa.gallane.backing.Constants.WORD_OPERATION1;
+import static com.nohseunghwa.gallane.backing.Constants.WORD_OPERATION2;
+import static com.nohseunghwa.gallane.backing.Constants.WORD_OPERATION3;
+
 /**
  * Created by fontjuna on 2017-08-24.
  */
 
 public class Calculator {
-    //연산자가 아닌 기호
-    private final String[] OPERATION0 = {"(", ")", ","};
-    //수 한 개가 필요한 연산기호(수는 왼쪽에 배치)
-    private final String[] OPERATION1 = {"!"};
-    //수 두 개가 필요한 연산기호(수는 양옆에 배치) - 왼쪽에서 오른쪽으로 계산한다.
-    //예) 1 + 2 = 3, 6 / 3 = 2, 2 ^ 3 = 8..
-    private final String[] OPERATION2 = {"+", "-", "*", "/", "^", "%"};
-    //수가 필요없는 문자 연산기호
-    private final String[] WORD_OPERATION1 = {"pi", "e"};
-    //수 한 개가 필요한 문자 연산기호(괄호로 구분한다.)
-    private final String[] WORD_OPERATION2 = {"sin", "sinh", "asin", "cos", "cosh", "acos", "tan", "tanh", "atan",
-            "sqrt", "exp", "abs", "log", "ceil", "floor", "round"};
-    //수 두 개가 필요한 문자 연산기호(괄호, 콤마로 구분한다.)
-    private final String[] WORD_OPERATION3 = {"pow"};
-    //나누기할 때 반올림 자릿수
-    private int HARF_ROUND_UP = 6;
-
     //싱글톤
     private static Calculator instance = null;
 
@@ -144,7 +135,6 @@ public class Calculator {
             return op1.add(op2);
         } else if (OPERATION2[1].equals(opcode)) {
             //빼기;
-//            op1.subtract(op2);
             return op1.subtract(op2);
         } else if (OPERATION2[2].equals(opcode)) {
             //곱하기

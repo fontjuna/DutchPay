@@ -21,6 +21,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:textColor="#676c6e"
                 android:id="@+id/result_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,7 +46,7 @@
         android:textSize="@dimen/button_text"/>
 
     <LinearLayout
-        android:background="@color/colorAccent"
+        android:background="@color/colorButtonFace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -94,7 +95,7 @@
                 android:textSize="@dimen/button_text"/>
 
             <TextView
-                android:id="@+id/button_go"
+                android:id="@+id/button_divide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
@@ -102,7 +103,7 @@
                 android:padding="@dimen/button_padding"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
-                android:text="="
+                android:text="/"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/button_text"/>
         </LinearLayout>
@@ -151,7 +152,7 @@
                 android:textSize="@dimen/button_text"/>
 
             <TextView
-                android:id="@+id/button_plus"
+                android:id="@+id/button_by"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/button_padding"
@@ -159,7 +160,7 @@
                 android:layout_weight="1"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
-                android:text="+"
+                android:text="*"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/button_text"/>
         </LinearLayout>
@@ -265,7 +266,7 @@
                 android:textSize="@dimen/button_text"/>
 
             <TextView
-                android:id="@+id/button_by"
+                android:id="@+id/button_plus"
                 android:layout_width="0dp"
                 android:padding="@dimen/button_padding"
                 android:layout_height="wrap_content"
@@ -273,7 +274,7 @@
                 android:layout_weight="1"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
-                android:text="*"
+                android:text="+"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/button_text"/>
         </LinearLayout>
@@ -322,7 +323,7 @@
                 android:textSize="@dimen/button_text"/>
 
             <TextView
-                android:id="@+id/button_divide"
+                android:id="@+id/button_go"
                 android:padding="@dimen/button_padding"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -330,7 +331,7 @@
                 android:layout_weight="1"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
-                android:text="/"
+                android:text="="
                 android:textColor="#ffffff"
                 android:textSize="@dimen/button_text"/>
         </LinearLayout>

@@ -16,9 +16,9 @@ import android.widget.TextView;
 import com.nohseunghwa.gallane.R;
 import com.nohseunghwa.gallane.backing.Galler;
 
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.HINT_EXPRESSION;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.HINT_INFORMATION;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.INPUT_EXPRESSION;
+import static com.nohseunghwa.gallane.backing.Constants.HINT_EXPRESSION;
+import static com.nohseunghwa.gallane.backing.Constants.HINT_INFORMATION;
+import static com.nohseunghwa.gallane.backing.Constants.INPUT_EXPRESSION;
 
 public class KidsFragment extends Fragment implements  View.OnClickListener {
 

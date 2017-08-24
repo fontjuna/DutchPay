@@ -18,8 +18,8 @@ import android.widget.Toast;
 
 import com.nohseunghwa.gallane.R;
 
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.INPUT_EXPRESSION;
-import static com.nohseunghwa.gallane.backing.CommonDutchPay.NO_BANKING;
+import static com.nohseunghwa.gallane.backing.Constants.INPUT_EXPRESSION;
+import static com.nohseunghwa.gallane.backing.Constants.NO_BANKING;
 
 public class SendFragment extends Fragment {
 
