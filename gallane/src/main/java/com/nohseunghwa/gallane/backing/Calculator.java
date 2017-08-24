@@ -143,7 +143,8 @@ public class Calculator {
             //더하기
             return op1.add(op2);
         } else if (OPERATION2[1].equals(opcode)) {
-            //빼기
+            //빼기;
+//            op1.subtract(op2);
             return op1.subtract(op2);
         } else if (OPERATION2[2].equals(opcode)) {
             //곱하기
