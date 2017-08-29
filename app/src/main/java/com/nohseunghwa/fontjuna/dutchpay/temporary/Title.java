@@ -1,5 +1,6 @@
 package com.nohseunghwa.fontjuna.dutchpay.temporary;
 
+import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -9,8 +10,31 @@ import java.util.TreeMap;
 public class Title {
     private String mTitle;
     private double mAmount;
-    private TreeMap<String, Double> mMember;
-    private TreeMap<String, Double> mRatio;
+    private TreeMap<String, Double> mData;
+
+    public Title() {
+        mTitle = "";
+        mAmount = 0.0;
+        mData = new TreeMap<>();
+    }
+
+    public Title(String title, double amount, TreeMap<String, Double> data) {
+        mTitle = title;
+        mAmount = amount;
+        mData = data;
+    }
+
+    public double get(String key) {
+        return mData.containsKey(key) ? mData.get(key) : 0.0;
+    }
+
+    public void put(String key, Double value) {
+        mData.put(key, value);
+    }
+
+    public Set<String> keySet() {
+        return mData.keySet();
+    }
 
     public String getTitle() {
         return mTitle;
@@ -28,19 +52,11 @@ public class Title {
         mAmount = amount;
     }
 
-    public TreeMap<String, Double> getMember() {
-        return mMember;
+    public TreeMap<String, Double> getData() {
+        return mData;
     }
 
-    public void setMember(TreeMap<String, Double> member) {
-        mMember = member;
-    }
-
-    public TreeMap<String, Double> getRatio() {
-        return mRatio;
-    }
-
-    public void setRatio(TreeMap<String, Double> ratio) {
-        mRatio = ratio;
+    public void setData(TreeMap<String, Double> data) {
+        mData = data;
     }
 }

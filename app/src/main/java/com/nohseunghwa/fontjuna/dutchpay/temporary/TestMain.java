@@ -1,7 +1,5 @@
 package com.nohseunghwa.fontjuna.dutchpay.temporary;
 
-import com.nohseunghwa.gallane.backing.Calculation;
-
 import java.util.Scanner;
 
 /**
@@ -20,7 +18,8 @@ public class TestMain {
                 break;
             }
             try {
-                System.out.println(input + " = " + Calculation.Calculate(input));
+                Spliter spliter= new Spliter(input, 1);
+                System.out.println(input + " = \n" + spliter.getResult());
             } catch (Exception e) {
                 System.out.println(input + " = " + "error!");
             }
